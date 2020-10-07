@@ -7,6 +7,7 @@
 ;;; Code:
 
 (require 'core-straight)
+(require 'core-packages)
 
 (provide 'core)
 

@@ -1,34 +1,45 @@
 ;;; Utzmacs --- Utz Certified
-;;;
-;;; Author: Michael Utz <michael@theutz.com>
-;;;
+;;
+;; Copyright (C) 2020 Michael Utz
+;;
+;; Author: Michael Utz <michael@theutz.com>
+;; Keywords: convenience
+;; URL: https://github.com/theutz/utzmacs
+;; Created: 7 Oct 2020
+
 ;;; Commentary:
-;;;
-;;; This is where I get everthing started.
-;;;
+;;
+;; This is where I get everthing started.
+;;
+
 ;;; Code:
+
+(eval-when-compile
+  (setq user-emacs-directory "~/.utzmacs")
+  (setq-default use-package-expand-minimally t))
 
 (let ((default-directory (expand-file-name "core/" user-emacs-directory)))
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
 (require 'core)
-(require 'straight)
-(straight-use-package 'use-package)
 (require 'use-package)
 
 (use-package evil
-  :functions (evil-mode)
+  :functions evil-mode
   :config
-  (evil-mode))
+  (evil-mode 1))
 
 (use-package flycheck
-  :functions (global-flycheck-mode)
-  :ensure t
+  :functions global-flycheck-mode
   :init
-  (global-flycheck-mode)
+  (setq flycheck-emacs-lisp-load-path 'inherit)
+  (global-flycheck-mode))
+
+(use-package which-key
+  :functions which-key-mode
   :config
-  (setq flycheck-emacs-lisp-load-path 'inherit))
+  (which-key-mode))
 
 (provide 'init)
 
