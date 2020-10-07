@@ -14,16 +14,33 @@
 
 ;;; Code:
 
-(eval-when-compile
-  (setq user-emacs-directory "~/.utzmacs")
-  (setq-default use-package-expand-minimally t))
+;; Setup Straight
 
-(let ((default-directory (expand-file-name "core/" user-emacs-directory)))
-  (normal-top-level-add-to-load-path '("."))
-  (normal-top-level-add-subdirs-to-load-path))
+(setq-default straight-fix-flycheck t
+	      straight-use-package-by-default t)
 
-(require 'core)
+(defvar bootstrap-version)
+
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+	(url-retrieve-synchronously
+	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	 'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(require 'straight)
+
+;; Setup Use Package
+
+(straight-use-package 'use-package)
 (require 'use-package)
+
+;; Setup Evil
 
 (use-package evil
   :demand t
@@ -44,10 +61,14 @@
   (setq flycheck-emacs-lisp-load-path 'inherit)
   (global-flycheck-mode))
 
+;; Setup Which Key
+
 (use-package which-key
   :functions which-key-mode
   :config
   (which-key-mode))
+
+;; Provide the Feature
 
 (provide 'init)
 
