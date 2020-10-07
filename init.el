@@ -1,16 +1,18 @@
-;;;; Utzmacs -- My Emacs Setup
-
+;;; Utzmacs --- Utz Certified
+;;;
+;;; Author: Michael Utz <michael@theutz.com>
+;;;
 ;;; Commentary:
-
+;;;
+;;; This is where I get everthing started.
+;;;
 ;;; Code:
 
-(setq-default straight-fix-flycheck t
-	      straight-use-package-by-default t
-	      flycheck-emacs-lisp-load-path 'inherit)
+(let ((default-directory (expand-file-name "core/" user-emacs-directory)))
+  (normal-top-level-add-to-load-path '("."))
+  (normal-top-level-add-subdirs-to-load-path))
 
-(load (concat user-emacs-directory "core/core-straight")
-      nil 'nomessage)
-
+(require 'core)
 (require 'straight)
 (straight-use-package 'use-package)
 (require 'use-package)
@@ -24,7 +26,9 @@
   :functions (global-flycheck-mode)
   :ensure t
   :init
-  (global-flycheck-mode))
+  (global-flycheck-mode)
+  :config
+  (setq flycheck-emacs-lisp-load-path 'inherit))
 
 (provide 'init)
 

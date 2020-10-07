@@ -4,6 +4,9 @@
 
 (defvar bootstrap-version)
 
+(setq-default straight-fix-flycheck t)
+(setq-default straight-use-package-by-default t)
+
 (defun utzmacs--bootstrap-straight ()
   "Download straight.el and load it."
   (let ((bootstrap-file
