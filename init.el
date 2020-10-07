@@ -26,7 +26,15 @@
 (require 'use-package)
 
 (use-package evil
+  :demand t
   :functions evil-mode
+  :init
+  (setq evil-split-window-below t)
+  (setq evil-vsplit-window-right t)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-u-delete t)
+  (setq evil-want-C-w-in-emacs-state t)
+  (setq evil-shift-width 2)
   :config
   (evil-mode 1))
 
