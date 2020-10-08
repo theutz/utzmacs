@@ -66,6 +66,15 @@
 
 ** Configuration
 
+*** UTF
+
+    #+BEGIN_SRC emacs-lisp
+      (setq-default buffer-file-coding-system 'utf-8-unix)
+      (set-default-coding-systems 'utf-8-unix)
+      (setq locale-coding-system 'utf-8-unix)
+      (prefer-coding-system 'utf-8-unix)
+    #+END_SRC
+
 *** Custom File
 
     #+BEGIN_SRC emacs-lisp
