@@ -233,6 +233,14 @@
 	(yas-global-mode 1))
     #+END_SRC
 
+*** WS Butler
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package ws-butler
+	:straight t
+	:hook prog-mode)
+    #+END_SRC
+
 * Footnotes
 
   # Local Variables:
