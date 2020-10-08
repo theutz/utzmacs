@@ -207,6 +207,23 @@
 		  "q" '(kill-buffer-and-window :which-key "Close Help")))
     #+END_SRC
 
+*** Doom Themes
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package doom-themes
+	:straight t
+	:config
+	(setq doom-themes-enable-bold t
+	      doom-themes-enable-italic t)
+	(load-theme 'doom-outrun-electric t)
+
+	(doom-themes-visual-bell-config)
+	;;(doom-themes-neotree-config)
+	;;(setq doom-themes-treemacs-theme "doom-colors")
+	;;(doom-themes-treemacs-config)
+	(doom-themes-org-config))
+    #+END_SRC
+
 * Footnotes
 
   # Local Variables:
