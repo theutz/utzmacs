@@ -78,6 +78,7 @@
 	:straight t
 	:init
 	:config
+	(general-auto-unbind-keys)
 	;; Setup Definer for Leader Key
 	(general-create-definer utz/set-leader-key
 	  :prefix utz/leader-key
@@ -202,7 +203,11 @@
 		"F" '(helpful-function :which-key "Helpful Function")
 		"f" '(helpful-callable :which-key "Helpful Callable")
 		"k" '(helpful-key :which-key "Helpful Key")
-		"v" '(helpful-variable :which-key "Helpful Variable"))
+		"v" '(helpful-variable :which-key "Helpful Variable")
+		"?" '(:ignore t :which-key "Emacs..."))
+	(:prefix "C-h ?"
+		 "m" '(emacs-index-search :which-key "Search Emacs Manual")
+		 "l" '(elisp-index-search :which-key "Search Elisp Manual"))
 	(:keymaps 'helpful-mode-map
 		  "q" '(kill-buffer-and-window :which-key "Close Help")))
     #+END_SRC
