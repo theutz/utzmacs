@@ -82,6 +82,46 @@
       (load custom-file)
     #+END_SRC
 
+*** Tool Bar Mode
+
+    #+BEGIN_SRC emacs-lisp
+      (tool-bar-mode 0)
+    #+END_SRC
+
+*** Line Numbers
+
+    #+BEGIN_SRC emacs-lisp
+      (global-display-line-numbers-mode 1)
+      (setq display-line-numbers-type 'visual)
+    #+END_SRC
+
+*** Show Paren Mode
+
+    #+BEGIN_SRC emacs-lisp
+      (show-paren-mode 1)
+    #+END_SRC
+
+*** Menu Bar Mode
+
+    #+BEGIN_SRC emacs-lisp
+      (menu-bar-mode 0)
+    #+END_SRC
+
+*** Scroll Bar Mode
+
+    #+BEGIN_SRC emacs-lisp
+      (scroll-bar-mode 0)
+    #+END_SRC
+
+*** Startup Screen
+
+    #+BEGIN_SRC emacs-lisp
+      (setq inhibit-startup-screen t
+	    initial-scratch-message nil)
+      (add-to-list 'default-frame-alist '(fullscreen . maximized))
+    #+END_SRC
+
+
 * Install & Configure Packages
 
 ** Setup
