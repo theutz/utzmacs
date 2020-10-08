@@ -93,7 +93,8 @@
 	(utz/set-leader-key
 	  "g" '(:ignore t :which-key "Git")
 	  "q" '(:ignore t :which-key "Quit")
-	  "u" '(universal-argument :which-key "Universal Argument"))
+	  "u" '(universal-argument :which-key "Universal Argument")
+	  "w" `(,(general-simulate-key "C-w") :which-key "Window"))
 
 	;; Define Universal Argument Map Keys
 	(general-define-key :keymaps 'universal-argument-map
