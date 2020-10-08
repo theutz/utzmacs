@@ -242,10 +242,8 @@
 		"v" '(helpful-variable :which-key "Helpful Variable")
 		"?" '(:ignore t :which-key "Emacs..."))
 	(:prefix "C-h ?"
-		 "m" '(emacs-index-search :which-key "Search Emacs Manual")
-		 "l" '(elisp-index-search :which-key "Search Elisp Manual"))
-	(:keymaps 'helpful-mode-map
-		  "q" '(kill-buffer-and-window :which-key "Close Help")))
+		 "e" '(emacs-index-search :which-key "Search Emacs Manual")
+		 "l" '(elisp-index-search :which-key "Search Elisp Manual")))
     #+END_SRC
 
 *** Doom Themes
