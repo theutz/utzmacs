@@ -133,6 +133,16 @@
 	(global-flycheck-mode))
     #+END_SRC
 
+*** Company
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package company
+	:straight t
+	:hook (after-init . global-company-mode)
+	:general
+	("C-SPC" '(company-complete :which-key "Company Complete")))
+    #+END_SRC
+
 *** Which Key
 
     #+BEGIN_SRC emacs-lisp
