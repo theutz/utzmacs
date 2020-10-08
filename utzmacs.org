@@ -107,6 +107,7 @@
 
 	;; Define Generic Top-Level Leader Keys
 	(utz/set-leader-key
+	  "SPC" `(,(general-simulate-key "M-x") :which-key "M-x")
 	  "g" '(:ignore t :which-key "Git")
 	  "h" `(,(general-simulate-key "C-h") :which-key "Help")
 	  "q" '(:ignore t :which-key "Quit")
