@@ -92,6 +92,7 @@
 	;; Define Generic Top-Level Leader Keys
 	(utz/set-leader-key
 	  "g" '(:ignore t :which-key "Git")
+	  "h" `(,(general-simulate-key "C-h") :which-key "Help")
 	  "q" '(:ignore t :which-key "Quit")
 	  "u" '(universal-argument :which-key "Universal Argument")
 	  "w" `(,(general-simulate-key "C-w") :which-key "Window"))
@@ -185,3 +186,20 @@
     # Local Variables:
     # eval: (add-to-list 'org-babel-default-header-args:emacs-lisp '(:results . "none"))
     # End:
+
+*** Helpful
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package helpful
+	:straight t
+	:general
+	(:infix "C-h"
+		"SPC" '(helpful-at-point :which-key "Helpful At Point")
+		"C" '(helpful-command :which-key "Helpful Command")
+		"F" '(helpful-function :which-key "Helpful Function")
+		"f" '(helpful-callable :which-key "Helpful Callable")
+		"k" '(helpful-key :which-key "Helpful Key")
+		"v" '(helpful-variable :which-key "Helpful Variable"))
+	(:keymaps 'helpful-mode-map
+		  "q" '(kill-buffer-and-window :which-key "Close Help")))
+    #+END_SRC
