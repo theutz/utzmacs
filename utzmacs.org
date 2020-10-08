@@ -35,6 +35,12 @@
 	"This file.")
     #+END_SRC
 
+    #+BEGIN_SRC emacs-lisp
+      (defconst utz/custom-file
+	(expand-file-name "custom.el" user-emacs-directory)
+	"Where to store customizations.")
+    #+END_SRC
+
 *** Functions
 
     #+BEGIN_SRC emacs-lisp
@@ -56,6 +62,15 @@
 	"View this configuration file."
 	(interactive)
 	(find-file utz/config-file))
+    #+END_SRC
+
+** Configuration
+
+*** Custom File
+
+    #+BEGIN_SRC emacs-lisp
+      (setq custom-file utz/custom-file)
+      (load custom-file)
     #+END_SRC
 
 * Install & Configure Packages
