@@ -78,16 +78,26 @@
 	:straight t
 	:init
 	:config
+	;; Setup Definer for Leader Key
 	(general-create-definer utz/set-leader-key
 	  :prefix utz/leader-key
 	  :non-normal-prefix (concat "M-" utz/leader-key)
 	  :keymaps utz/default-definer-keymaps)
+
+	;; Setup Definer for Local Leader Key
 	(general-create-definer utz/set-localleader-key
 	  :prefix utz/localleader-key
 	  :non-normal-prefix (concat "M-" utz/localleader-key))
+
+	;; Define Generic Top-Level Leader Keys
 	(utz/set-leader-key
 	  "g" '(:ignore t :which-key "Git")
-	  "q" '(:ignore t :which-key "Quit")))
+	  "q" '(:ignore t :which-key "Quit")
+	  "u" '(universal-argument :which-key "Universal Argument"))
+
+	;; Define Universal Argument Map Keys
+	(general-define-key :keymaps 'universal-argument-map
+			    (concat utz/leader-key " u") 'universal-argument-more)))
     #+END_SRC
 
 *** Evil
