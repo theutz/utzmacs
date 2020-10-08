@@ -137,8 +137,16 @@
     #+BEGIN_SRC emacs-lisp
       (use-package which-key
 	:straight t
+	:demand t
 	:functions which-key-mode
+	:general
+	(:infix "C-h"
+		"K" '(which-key-show-top-level :which-key "Which Key Show Top Level")
+		"M" '(which-key-show-major-mode :which-key "Which Key Show Major Mode"))
 	:config
+	(setq which-key-idle-delay 0.3)
+	(setq which-key-max-description-length 40)
+	(setq which-key-add-column-padding 1)
 	(which-key-mode))
     #+END_SRC
 
