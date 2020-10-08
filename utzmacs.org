@@ -277,7 +277,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package ws-butler
 	:straight t
-	:hook prog-mode)
+	:hook (prog-mode . ws-butler-mode))
     #+END_SRC
 
 * Footnotes
