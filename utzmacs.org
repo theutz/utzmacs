@@ -191,10 +191,6 @@
     #+END_SRC
 
 
-    # Local Variables:
-    # eval: (add-to-list 'org-babel-default-header-args:emacs-lisp '(:results . "none"))
-    # End:
-
 *** Helpful
 
     #+BEGIN_SRC emacs-lisp
@@ -211,3 +207,9 @@
 	(:keymaps 'helpful-mode-map
 		  "q" '(kill-buffer-and-window :which-key "Close Help")))
     #+END_SRC
+
+* Footnotes
+
+  # Local Variables:
+  # eval: (add-to-list 'org-babel-default-header-args:emacs-lisp '(:results . "none"))
+  # End:
