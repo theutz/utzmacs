@@ -97,7 +97,7 @@
 
 	;; Define Universal Argument Map Keys
 	(general-define-key :keymaps 'universal-argument-map
-			    (concat utz/leader-key " u") 'universal-argument-more)))
+			    (concat utz/leader-key " u") 'universal-argument-more))
     #+END_SRC
 
 *** Evil
@@ -158,7 +158,9 @@
 	:straight t
 	:general
 	(utz/set-leader-key :infix "g"
-	  "g" '(magit-status :which-key "Magit Status")))
+	  "SPC" '(magit-status :which-key "Magit Status")
+	  "RET" '(magit-dispatch :which-key "Magit Dispatch")
+	  "s" '(magit-stage-file :which-key "Magit Stage File")))
     #+END_SRC
 
 **** Evil Magit
