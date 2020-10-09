@@ -157,7 +157,8 @@
 
 	;; Define Generic Top-Level Leader Keys
 	(utz/set-leader-key
-	  "SPC" `(,(general-simulate-key "M-x") :which-key "M-x")
+	  "b" '(:ignore t :wk "Buffer")
+	  "f" '(:ignore t :wk "File")
 	  "g" '(:ignore t :which-key "Git")
 	  "h" `(,(general-simulate-key "C-h") :which-key "Help")
 	  "q" '(:ignore t :which-key "Quit")
@@ -342,6 +343,27 @@
 	:straight t
 	:hook (prog-mode . ws-butler-mode))
     #+END_SRC
+
+*** Ivy / Counsel / Swiper
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package counsel
+	:straight t
+	:general
+	("C-s" '(swiper-isearch :wk "Search")
+	 "C-x C-b" '(ivy-switch-buffer :wk "Switch Buffer"))
+	(utz/set-leader-key
+	  "SPC" '(counsel-M-x :wk "M-x")
+	  "/" '(swiper-isearch :wk "Search")
+	  "b b" '(ivy-switch-buffer :wk "List Buffers")
+	  "f f" '(counsel-find-file :wk "Find File")
+	  "f /" '(swiper-isearch :wk "Search in File"))
+	:config
+	(setq ivy-use-virtual-buffers t)
+	(setq ivy-count-format "(%d/%d) ")
+	(ivy-mode 1))
+    #+END_SRC
+
 
 * Footnotes
 
