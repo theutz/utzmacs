@@ -364,6 +364,20 @@
 	(ivy-mode 1))
     #+END_SRC
 
+*** Hydra
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package hydra
+	:straight t)
+    #+END_SRC
+
+**** Ivy Hydra
+
+     #+BEGIN_SRC emacs-lisp
+       (use-package ivy-hydra
+	 :straight t)
+     #+END_SRC
+
 
 * Footnotes
 
