@@ -1,6 +1,7 @@
 #+TITLE: Utzmacs
 #+AUTHOR: Michael Utz
 #+EMAIL: michael@theutz.com
+#+STARTUP: content
 
 * Configure Emacs
 
@@ -181,6 +182,8 @@
 	(setq evil-want-C-u-delete t)
 	(setq evil-want-C-w-in-emacs-state t)
 	(setq evil-shift-width 2)
+	(setq evil-want-keybinding nil)
+	(setq evil-want-integration t)
 	:config
 	(evil-set-initial-state 'helpful-mode 'motion)
 	(evil-mode 1))
@@ -194,6 +197,16 @@
 	 :after evil
 	 :config
 	 (global-evil-surround-mode 1))
+     #+END_SRC
+
+**** Evil Collection
+
+     #+BEGIN_SRC emacs-lisp
+       (use-package evil-collection
+	 :straight t
+	 :after evil
+	 :config
+	 (evil-collection-init))
      #+END_SRC
 
 
