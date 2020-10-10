@@ -188,22 +188,23 @@
 
 	;; Define keys not associated with packages
 	(utz/set-leader-key
+	  "b n" '(next-buffer :wk "Next Buffer")
+	  "b p" '(previous-buffer :wk "Previous Buffer")
 	  "b" '(:ignore t :wk "Buffer")
-	  "f e i" '(utz/edit-init-file :wk "Edit Init File")
 	  "f e R" '(utz/load-config-file :wk "Reload Config File")
+	  "f e i" '(utz/edit-init-file :wk "Edit Init File")
 	  "f e r" '(utz/edit-config-file :wk "Edit Config File")
 	  "f e" '(:ignore t :wk "Emacs")
+	  "f r" '(revert-buffer :wk "Revert File")
+	  "f s" '(save-buffer :wk "Save File")
 	  "f" '(:ignore t :wk "File")
 	  "g" '(:ignore t :wk "Git")
+	  "h ," '(describe-face :wk "Describe Face")
 	  "h e" '(emacs-index-search :wk "Search Emacs Manual")
 	  "h l" '(elisp-index-search :wk "Search Elisp Manual")
-	  "h ," '(describe-face :wk "Describe Face")
 	  "q" '(:ignore t :wk "Quit")
 	  "u" '(universal-argument :wk "Universal Argument")
 	  "w" `(,(general-simulate-key "C-w") :wk "Window"))
-
-	(utz/set-leader-key :infix "f"
-	  "s" '(save-buffer :wk "Save Buffer"))
 
 	;; Define Universal Argument Map Keys
 	(general-define-key :keymaps 'universal-argument-map
@@ -297,7 +298,8 @@
       (use-package restart-emacs
 	:straight t
 	:general
-	(utz/set-leader-key :infix "q" "r" '(restart-emacs :wk "Restart Emacs")))
+	(utz/set-leader-key
+	  "q r" '(restart-emacs :wk "Restart Emacs")))
     #+END_SRC
 
 *** Magit
