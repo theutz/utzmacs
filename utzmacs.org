@@ -220,7 +220,6 @@
 	 (evil-collection-init))
      #+END_SRC
 
-
 *** Flycheck
 
     #+BEGIN_SRC emacs-lisp
@@ -388,7 +387,6 @@
        (use-package ivy-hydra
 	 :straight t)
      #+END_SRC
-
 
 * Footnotes
 
