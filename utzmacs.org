@@ -38,7 +38,8 @@
 
     #+BEGIN_SRC emacs-lisp
       (defconst utz/custom-file
-	(expand-file-name "custom.el" user-emacs-directory)
+	(cond ((boundp 'custom-file) custom-file)
+	      (t (expand-file-name "custom.el" user-emacs-directory)))
 	"Where to store customizations.")
     #+END_SRC
 
@@ -74,13 +75,6 @@
       (set-default-coding-systems 'utf-8-unix)
       (setq locale-coding-system 'utf-8-unix)
       (prefer-coding-system 'utf-8-unix)
-    #+END_SRC
-
-*** Custom File
-
-    #+BEGIN_SRC emacs-lisp
-      (setq custom-file utz/custom-file)
-      (load custom-file)
     #+END_SRC
 
 *** Tool Bar Mode
@@ -122,6 +116,11 @@
       (add-to-list 'default-frame-alist '(fullscreen . maximized))
     #+END_SRC
 
+*** Local Variables
+
+    #+BEGIN_SRC emacs-lisp
+      (setq enable-local-variables :safe)
+    #+END_SRC
 
 * Install & Configure Packages
 

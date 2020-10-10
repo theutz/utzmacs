@@ -15,6 +15,13 @@
 ;;; Code:
 
 (let ((gc-cons-threshold most-positive-fixnum))
+  ;; Make a file to contain all user customizations
+  (setq custom-file
+	(expand-file-name "custom.el"
+			  (file-name-directory (or load-file-name buffer-file-name))))
+  (load custom-file)
+
+  ;; Setup straight.el
   (defvar bootstrap-version)
   (let ((bootstrap-file
 	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -28,9 +35,11 @@
 	(eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage))
 
+  ;; Setup org
   (straight-use-package 'org)
   (require 'org)
 
+  ;; Require my literate config
   (org-babel-load-file
    (expand-file-name "utzmacs.org" user-emacs-directory))
 
