@@ -122,6 +122,15 @@
       (setq enable-local-variables :safe)
     #+END_SRC
 
+*** Fonts
+
+    #+BEGIN_SRC emacs-lisp
+      (custom-set-faces
+       '(default ((t (:family "BlexMono Nerd Font"
+			      :height 130
+			      :weight normal)))))
+    #+END_SRC
+
 * Install & Configure Packages
 
 ** Setup
