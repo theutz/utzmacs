@@ -90,7 +90,6 @@
 	   (funcall opener utz/config-file)))
      #+END_SRC
 
-
 ** Configuration
 
 *** UTF
@@ -196,7 +195,9 @@
 	  "f e" '(:ignore t :wk "Emacs")
 	  "f" '(:ignore t :wk "File")
 	  "g" '(:ignore t :wk "Git")
-	  "h" `(,(general-simulate-key "C-h") :wk "Help")
+	  "h e" '(emacs-index-search :wk "Search Emacs Manual")
+	  "h l" '(elisp-index-search :wk "Search Elisp Manual")
+	  "h ," '(describe-face :wk "Describe Face")
 	  "q" '(:ignore t :wk "Quit")
 	  "u" '(universal-argument :wk "Universal Argument")
 	  "w" `(,(general-simulate-key "C-w") :wk "Window"))
@@ -279,9 +280,9 @@
 	:demand t
 	:functions which-key-mode
 	:general
-	(:infix "C-h"
-		"K" '(which-key-show-top-level :wk "Which Key Show Top Level")
-		"M" '(which-key-show-major-mode :wk "Which Key Show Major Mode"))
+	(utz/set-leader-key :infix "h"
+	  "K" '(which-key-show-top-level :wk "Which Key Show Top Level")
+	  "M" '(which-key-show-major-mode :wk "Which Key Show Major Mode"))
 	:custom
 	(which-key-idle-delay 0.3)
 	(which-key-max-description-length 40)
@@ -334,17 +335,13 @@
       (use-package helpful
 	:straight t
 	:general
-	(:infix "C-h"
-		"SPC" '(helpful-at-point :wk "Helpful At Point")
-		"C" '(helpful-command :wk "Helpful Command")
-		"F" '(helpful-function :wk "Helpful Function")
-		"f" '(helpful-callable :wk "Helpful Callable")
-		"k" '(helpful-key :wk "Helpful Key")
-		"v" '(helpful-variable :wk "Helpful Variable")
-		"?" '(:ignore t :wk "Emacs..."))
-	(:prefix "C-h ?"
-		 "e" '(emacs-index-search :wk "Search Emacs Manual")
-		 "l" '(elisp-index-search :wk "Search Elisp Manual")))
+	(utz/set-leader-key :infix "h"
+	  "SPC" '(helpful-at-point :wk "Helpful At Point")
+	  "C" '(helpful-command :wk "Helpful Command")
+	  "F" '(helpful-function :wk "Helpful Function")
+	  "f" '(helpful-callable :wk "Helpful Callable")
+	  "k" '(helpful-key :wk "Helpful Key")
+	  "v" '(helpful-variable :wk "Helpful Variable")))
     #+END_SRC
 
 *** Doom Themes
