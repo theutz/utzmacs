@@ -45,26 +45,51 @@
 
 *** Functions
 
-    #+BEGIN_SRC emacs-lisp
-      (defun utz/reload-configuration ()
-	"Reload the configuration file."
-	(interactive)
-	(load user-init-file nil 'nomessage))
-    #+END_SRC
+**** Load Config File
 
-    #+BEGIN_SRC emacs-lisp
-      (defun utz/view-init-file ()
-	"View the init file."
-	(interactive)
-	(find-file utz/init-file))
-    #+END_SRC
+     #+BEGIN_SRC emacs-lisp
+       (defun utz/load-config-file ()
+	 "(Re)load the configuration file."
+	 (interactive)
+	 (load utz/init-file nil 'nomessage))
+     #+END_SRC
 
-    #+BEGIN_SRC emacs-lisp
-      (defun utz/view-configuration ()
-	"View this configuration file."
-	(interactive)
-	(find-file utz/config-file))
-    #+END_SRC
+**** Edit Init File
+
+     #+BEGIN_SRC emacs-lisp
+       (defun utz/edit-init-file ()
+	 "Edit the init file.
+
+       By default, this command opens your config file
+       in another window.
+
+       If called interactively, press `C-u' once to
+       open it in the same window."
+	 (interactive)
+	 (let ((opener (pcase current-prefix-arg
+			 ('(4) 'find-file)
+			 (- 'find-file-other-window))))
+	   (funcall opener utz/init-file)))
+     #+END_SRC
+
+**** Edit Config File
+
+     #+BEGIN_SRC emacs-lisp
+       (defun utz/edit-config-file ()
+	 "Edit this configuration file.
+
+       By default, this command opens your config
+       file in another window.
+
+       If called interactively, press `C-u' once to
+       open it in the same window."
+	 (interactive)
+	 (let ((opener (pcase current-prefix-arg
+			 ('(4) 'find-file)
+			 (- 'find-file-other-window))))
+	   (funcall opener utz/config-file)))
+     #+END_SRC
+
 
 ** Configuration
 
@@ -162,9 +187,13 @@
 	  :prefix utz/localleader-key
 	  :non-normal-prefix (concat "M-" utz/localleader-key))
 
-	;; Define Generic Top-Level Leader Keys
+	;; Define keys not associated with packages
 	(utz/set-leader-key
 	  "b" '(:ignore t :wk "Buffer")
+	  "f e i" '(utz/edit-init-file :wk "Edit Init File")
+	  "f e R" '(utz/load-config-file :wk "Reload Config File")
+	  "f e r" '(utz/edit-config-file :wk "Edit Config File")
+	  "f e" '(:ignore t :wk "Emacs")
 	  "f" '(:ignore t :wk "File")
 	  "g" '(:ignore t :wk "Git")
 	  "h" `(,(general-simulate-key "C-h") :wk "Help")
@@ -267,9 +296,7 @@
       (use-package restart-emacs
 	:straight t
 	:general
-	(utz/set-leader-key :infix "q"
-	  "r" '(utz/reload-configuration :wk "Reload Configuration")
-	  "R" '(restart-emacs :wk "Restart Emacs")))
+	(utz/set-leader-key :infix "q" "r" '(restart-emacs :wk "Restart Emacs")))
     #+END_SRC
 
 *** Magit
