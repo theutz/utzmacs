@@ -159,11 +159,11 @@
 	(utz/set-leader-key
 	  "b" '(:ignore t :wk "Buffer")
 	  "f" '(:ignore t :wk "File")
-	  "g" '(:ignore t :which-key "Git")
-	  "h" `(,(general-simulate-key "C-h") :which-key "Help")
-	  "q" '(:ignore t :which-key "Quit")
-	  "u" '(universal-argument :which-key "Universal Argument")
-	  "w" `(,(general-simulate-key "C-w") :which-key "Window"))
+	  "g" '(:ignore t :wk "Git")
+	  "h" `(,(general-simulate-key "C-h") :wk "Help")
+	  "q" '(:ignore t :wk "Quit")
+	  "u" '(universal-argument :wk "Universal Argument")
+	  "w" `(,(general-simulate-key "C-w") :wk "Window"))
 
 	;; Define Universal Argument Map Keys
 	(general-define-key :keymaps 'universal-argument-map
@@ -230,7 +230,7 @@
 	:straight t
 	:hook (after-init . global-company-mode)
 	:general
-	("C-SPC" '(company-complete :which-key "Company Complete")))
+	("C-SPC" '(company-complete :wk "Company Complete")))
     #+END_SRC
 
 *** Which Key
@@ -242,8 +242,8 @@
 	:functions which-key-mode
 	:general
 	(:infix "C-h"
-		"K" '(which-key-show-top-level :which-key "Which Key Show Top Level")
-		"M" '(which-key-show-major-mode :which-key "Which Key Show Major Mode"))
+		"K" '(which-key-show-top-level :wk "Which Key Show Top Level")
+		"M" '(which-key-show-major-mode :wk "Which Key Show Major Mode"))
 	:config
 	(setq which-key-idle-delay 0.3)
 	(setq which-key-max-description-length 40)
@@ -258,8 +258,8 @@
 	:straight t
 	:general
 	(utz/set-leader-key :infix "q"
-	  "r" '(utz/reload-configuration :which-key "Reload Configuration")
-	  "R" '(restart-emacs :which-key "Restart Emacs")))
+	  "r" '(utz/reload-configuration :wk "Reload Configuration")
+	  "R" '(restart-emacs :wk "Restart Emacs")))
     #+END_SRC
 
 *** Magit
@@ -269,9 +269,9 @@
 	:straight t
 	:general
 	(utz/set-leader-key :infix "g"
-	  "SPC" '(magit-status :which-key "Magit Status")
-	  "RET" '(magit-dispatch :which-key "Magit Dispatch")
-	  "s" '(magit-stage-file :which-key "Magit Stage File")))
+	  "SPC" '(magit-status :wk "Magit Status")
+	  "RET" '(magit-dispatch :wk "Magit Dispatch")
+	  "s" '(magit-stage-file :wk "Magit Stage File")))
     #+END_SRC
 
 **** Evil Magit
@@ -298,16 +298,16 @@
 	:straight t
 	:general
 	(:infix "C-h"
-		"SPC" '(helpful-at-point :which-key "Helpful At Point")
-		"C" '(helpful-command :which-key "Helpful Command")
-		"F" '(helpful-function :which-key "Helpful Function")
-		"f" '(helpful-callable :which-key "Helpful Callable")
-		"k" '(helpful-key :which-key "Helpful Key")
-		"v" '(helpful-variable :which-key "Helpful Variable")
-		"?" '(:ignore t :which-key "Emacs..."))
+		"SPC" '(helpful-at-point :wk "Helpful At Point")
+		"C" '(helpful-command :wk "Helpful Command")
+		"F" '(helpful-function :wk "Helpful Function")
+		"f" '(helpful-callable :wk "Helpful Callable")
+		"k" '(helpful-key :wk "Helpful Key")
+		"v" '(helpful-variable :wk "Helpful Variable")
+		"?" '(:ignore t :wk "Emacs..."))
 	(:prefix "C-h ?"
-		 "e" '(emacs-index-search :which-key "Search Emacs Manual")
-		 "l" '(elisp-index-search :which-key "Search Elisp Manual")))
+		 "e" '(emacs-index-search :wk "Search Emacs Manual")
+		 "l" '(elisp-index-search :wk "Search Elisp Manual")))
     #+END_SRC
 
 *** Doom Themes
