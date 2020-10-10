@@ -54,3 +54,6 @@ transient/
 
 # org-babel output
 utzmacs.el
+
+# recentf
+recentf
