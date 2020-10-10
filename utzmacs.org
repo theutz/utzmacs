@@ -331,6 +331,16 @@
 	(org-confirm-babel-evaluate nil))
     #+END_SRC
 
+**** Org Bullets
+
+     #+BEGIN_SRC emacs-lisp
+       (use-package org-bullets
+	 :straight t
+	 :after org
+	 :hook (org-mode . org-bullets-mode))
+     #+END_SRC
+
+
 *** Helpful
 
     #+BEGIN_SRC emacs-lisp
