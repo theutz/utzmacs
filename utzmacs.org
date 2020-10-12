@@ -4,40 +4,61 @@
 #+STARTUP: content
 * Configure Emacs
 ** Definitions
-*** Constants
+*** Variables
+**** Utz Customization Group
+     #+BEGIN_SRC emacs-lisp
+       (defgroup utz nil
+	 "All my customization options."
+	 :group 'convenience)
+     #+END_SRC
 **** Leader Key
      #+BEGIN_SRC emacs-lisp
-       (defconst utz/leader-key "SPC"
-	 "Like VIM's leader.")
+       (defcustom utz/leader-key "SPC"
+	 "Like VIM's leader."
+	 :type 'string
+	 :initialize 'custom-initialize-default
+	 :group 'utz)
      #+END_SRC
 **** Local Leader Key
      #+BEGIN_SRC emacs-lisp
-       (defconst utz/localleader-key ","
-	 "Like VIM's localleader.")
+       (defcustom utz/localleader-key ","
+	 "Like VIM's localleader."
+	 :type 'string
+	 :initialize 'custom-initialize-default
+	 :group 'utz)
      #+END_SRC
 **** Default Definer Keymaps
      #+BEGIN_SRC emacs-lisp
-       (defconst utz/default-definer-keymaps '(normal insert visual emacs)
-	 "The default evil modes used in my custom definer")
+       (defcustom utz/default-definer-keymaps '(normal insert visual emacs)
+	 "The default evil modes used in my custom definer"
+	 :type '(repeat symbol)
+	 :initialize 'custom-initialize-default
+	 :group 'utz)
      #+END_SRC
 **** Init File
      #+BEGIN_SRC emacs-lisp
-       (defconst utz/init-file
-	 (expand-file-name "init.el" user-emacs-directory)
-	 "File where Utzmacs is bootstrapped.")
+       (defcustom utz/init-file (expand-file-name "init.el" user-emacs-directory)
+	 "File where Utzmacs is bootstrapped."
+	 :type 'file
+	 :initialize 'custom-initialize-default
+	 :group 'utz)
      #+END_SRC
 **** Config File
      #+BEGIN_SRC emacs-lisp
-       (defconst utz/config-file
-	 (expand-file-name "utzmacs.org" user-emacs-directory)
-	 "This file.")
+       (defcustom utz/config-file (expand-file-name "utzmacs.org" user-emacs-directory)
+	 "This file."
+	 :type 'file
+	 :initialize 'custom-initialize-default
+	 :group 'utz)
      #+END_SRC
 **** Custom File
      #+BEGIN_SRC emacs-lisp
-       (defconst utz/custom-file
-	 (cond ((boundp 'custom-file) custom-file)
-	       (t (expand-file-name "custom.el" user-emacs-directory)))
-	 "Where to store customizations.")
+       (defcustom utz/custom-file (cond ((boundp 'custom-file) custom-file)
+				     (t (expand-file-name "custom.el" user-emacs-directory)))
+	 "Where to store customizations."
+	 :type 'file
+	 :initialize 'custom-initialize-default
+	 :group 'utz)
      #+END_SRC
 *** Functions
 **** Load Config File
