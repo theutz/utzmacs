@@ -43,6 +43,18 @@
 	"Where to store customizations.")
     #+END_SRC
 
+    #+BEGIN_SRC emacs-lisp
+      (defconst utz/font-mono
+	"SF Mono"
+	"Fixed-width font used mostly for coding.")
+    #+END_SRC
+
+    #+BEGIN_SRC emacs-lisp
+      (defconst utz/font-display
+	"SF Pro"
+	"Font used for titles, headings, and other non-fixed-width applications.")
+    #+END_SRC
+
 *** Functions
 
 **** Load Config File
