@@ -2,7 +2,6 @@
 #+AUTHOR: Michael Utz
 #+EMAIL: michael@theutz.com
 #+STARTUP: content
-
 * Configure Emacs
 ** Definitions
 *** Constants
@@ -243,9 +242,7 @@
 	:general
 	("C-SPC" '(company-complete :wk "Company Complete")))
     #+END_SRC
-
 *** Which Key
-
     #+BEGIN_SRC emacs-lisp
       (use-package which-key
 	:straight t
@@ -262,9 +259,7 @@
 	:config
 	(which-key-mode))
     #+END_SRC
-
 *** Restart Emacs
-
     #+BEGIN_SRC emacs-lisp
       (use-package restart-emacs
 	:straight t
@@ -272,9 +267,7 @@
 	(utz/set-leader-key
 	  "q r" '(restart-emacs :wk "Restart Emacs")))
     #+END_SRC
-
 *** Magit
-
     #+BEGIN_SRC emacs-lisp
       (use-package magit
 	:straight t
@@ -284,17 +277,13 @@
 	  "RET" '(magit-dispatch :wk "Magit Dispatch")
 	  "s" '(magit-stage-file :wk "Magit Stage File")))
     #+END_SRC
-
 **** Evil Magit
-
      #+BEGIN_SRC emacs-lisp
        (use-package evil-magit
 	 :straight t
 	 :after (evil magit))
      #+END_SRC
-
 *** Org
-
     #+BEGIN_SRC emacs-lisp
       (use-package org
 	:straight t
@@ -314,18 +303,14 @@
 	(org-level-4 ((t (:inherit (outline-4 utz/org-levels)
 				   :height 140)))))
     #+END_SRC
-
 **** Org Bullets
-
      #+BEGIN_SRC emacs-lisp
        (use-package org-bullets
 	 :straight t
 	 :after org
 	 :hook (org-mode . org-bullets-mode))
      #+END_SRC
-
 *** Helpful
-
     #+BEGIN_SRC emacs-lisp
       (use-package helpful
 	:straight t
@@ -338,9 +323,7 @@
 	  "k" '(helpful-key :wk "Helpful Key")
 	  "v" '(helpful-variable :wk "Helpful Variable")))
     #+END_SRC
-
 *** Doom Themes
-
     #+BEGIN_SRC emacs-lisp
       (use-package doom-themes
 	:straight t
@@ -355,26 +338,20 @@
 	;;(doom-themes-treemacs-config)
 	(doom-themes-org-config))
     #+END_SRC
-
 *** YASnippet
-
     #+BEGIN_SRC emacs-lisp
       (use-package yasnippet
 	:straight t
 	:config
 	(yas-global-mode 1))
     #+END_SRC
-
 *** WS Butler
-
     #+BEGIN_SRC emacs-lisp
       (use-package ws-butler
 	:straight t
 	:hook (prog-mode . ws-butler-mode))
     #+END_SRC
-
 *** Ivy / Counsel / Swiper
-
     #+BEGIN_SRC emacs-lisp
       (use-package counsel
 	:straight t
@@ -397,23 +374,17 @@
 	(setq ivy-count-format "(%d/%d) ")
 	(ivy-mode 1))
     #+END_SRC
-
 *** Hydra
-
     #+BEGIN_SRC emacs-lisp
       (use-package hydra
 	:straight t)
     #+END_SRC
-
 **** Ivy Hydra
-
      #+BEGIN_SRC emacs-lisp
        (use-package ivy-hydra
 	 :straight t)
      #+END_SRC
-
 * Footnotes
-
   # Local Variables:
   # eval: (add-to-list 'org-babel-default-header-args:emacs-lisp '(:results . "none"))
   # End:
