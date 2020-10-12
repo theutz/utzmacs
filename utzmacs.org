@@ -146,7 +146,7 @@
 **** Fixed Width Font
 
      #+BEGIN_SRC emacs-lisp
-       (defface utz/fixed-width-font '((t (:inherit 'default :family "SF Mono")))
+       (defface utz/fixed-width-font '((t (:inherit 'default :family "BlexMono Nerd Font")))
 	 "Face for code and other fixed-width applications."
 	 :group 'utz/faces)
      #+END_SRC
@@ -219,10 +219,9 @@
 *** Fonts
 
     #+BEGIN_SRC emacs-lisp
-      (custom-set-faces
-       '(default ((t (:family "BlexMono Nerd Font"
-			      :height 130
-			      :weight normal)))))
+      (custom-set-faces `(default
+			   ((t (:family ,(face-attribute 'utz/fixed-width-font :family)
+					:height 120)))))
     #+END_SRC
 
 * Install & Configure Packages
