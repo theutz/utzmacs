@@ -39,18 +39,6 @@
 	       (t (expand-file-name "custom.el" user-emacs-directory)))
 	 "Where to store customizations.")
      #+END_SRC
-**** Font Family Mono 
-     #+BEGIN_SRC emacs-lisp
-       (defconst utz/font-family-mono
-	 "SF Mono"
-	 "Fixed-width font used mostly for coding.")
-     #+END_SRC
-**** Font Family Display
-     #+BEGIN_SRC emacs-lisp
-       (defconst utz/font-family-display
-	 "SF Pro"
-	 "Font used for titles, headings, and other non-fixed-width applications.")
-     #+END_SRC
 *** Functions
 **** Load Config File
      #+BEGIN_SRC emacs-lisp
@@ -92,12 +80,30 @@
 	   (funcall opener utz/config-file)))
      #+END_SRC
 *** Faces
+**** Utz Faces Customization Group
+     #+BEGIN_SRC emacs-lisp
+       (defgroup utz/faces nil
+	 "All my face customizations."
+	 :group 'faces)
+     #+END_SRC
+**** Display Font
+     #+BEGIN_SRC emacs-lisp
+       (defface utz/display-font '((t (:inherit 'default :family "SF Pro")))
+	 "Face for titles, headings and other non-fixed-width applications."
+	 :group 'utz/faces)
+     #+END_SRC
+**** Fixed Width Font
+     #+BEGIN_SRC emacs-lisp
+       (defface utz/fixed-width-font '((t (:inherit 'default :family "SF Mono")))
+	 "Face for code and other fixed-width applications."
+	 :group 'utz/faces)
+     #+END_SRC
 **** Org Levels
      #+BEGIN_SRC emacs-lisp
        (defface utz/org-levels
-	 `((t (:inherit 'default
-		       :family ,utz/font-family-display)))
-	 "Face for headline levels in Org.")
+	 '((t (:inherit (utz/display-font default))))
+	 "Face for headline levels in Org."
+	 :group 'utz/faces)
      #+END_SRC
 ** Configuration
 *** UTF
