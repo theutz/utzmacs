@@ -322,19 +322,27 @@
 	(org-confirm-babel-evaluate nil)
 	:custom-face
 	(org-level-1 ((t (:inherit (outline-1 utz/org-levels)
-				   :height 220))))
+				   :height 220
+				   :weight ultra-bold))))
 	(org-level-2 ((t (:inherit (outline-2 utz/org-levels)
-				   :height 200))))
+				   :height 200
+				   :weight bold))))
 	(org-level-3 ((t (:inherit (outline-3 utz/org-levels)
-				   :height 180))))
+				   :height 180
+				   :weight semi-bold))))
 	(org-level-4 ((t (:inherit (outline-4 utz/org-levels)
-				   :height 160))))
+				   :height 160
+				   :weight normal))))
 	(org-level-5 ((t (:inherit (outline-5 utz/org-levels)
-				   :height 150))))
+				   :height 150
+				   :weight normal))))
 	(org-level-6 ((t (:inherit (outline-6 utz/org-levels)
-				   :height 140))))
-	(org-level-7 ((t (:inherit (outline-7 utz/org-levels)))))
-	(org-level-8 ((t (:inherit (outline-8 utz/org-levels))))))
+				   :height 140
+				   :weight normal))))
+	(org-level-7 ((t (:inherit (outline-7 utz/org-levels)
+				   :weight normal))))
+	(org-level-8 ((t (:inherit (outline-8 utz/org-levels)
+				   :weight normal)))))
     #+END_SRC
 **** Org Bullets
      #+BEGIN_SRC emacs-lisp
