@@ -4,70 +4,63 @@
 #+STARTUP: content
 
 * Configure Emacs
-
 ** Definitions
-
 *** Constants
-
-    #+BEGIN_SRC emacs-lisp
-      (defconst utz/leader-key "SPC"
-	"Like VIM's leader.")
-    #+END_SRC
-
-    #+BEGIN_SRC emacs-lisp
-      (defconst utz/localleader-key ","
-	"Like VIM's localleader.")
-    #+END_SRC
-
-    #+BEGIN_SRC emacs-lisp
-      (defconst utz/default-definer-keymaps '(normal insert visual emacs)
-	"The default evil modes used in my custom definer")
-    #+END_SRC
-
-    #+BEGIN_SRC emacs-lisp
-      (defconst utz/init-file
-	(expand-file-name "init.el" user-emacs-directory)
-	"File where Utzmacs is bootstrapped.")
-    #+END_SRC
-
-    #+BEGIN_SRC emacs-lisp
-      (defconst utz/config-file
-	(expand-file-name "utzmacs.org" user-emacs-directory)
-	"This file.")
-    #+END_SRC
-
-    #+BEGIN_SRC emacs-lisp
-      (defconst utz/custom-file
-	(cond ((boundp 'custom-file) custom-file)
-	      (t (expand-file-name "custom.el" user-emacs-directory)))
-	"Where to store customizations.")
-    #+END_SRC
-
-    #+BEGIN_SRC emacs-lisp
-      (defconst utz/font-mono
-	"SF Mono"
-	"Fixed-width font used mostly for coding.")
-    #+END_SRC
-
-    #+BEGIN_SRC emacs-lisp
-      (defconst utz/font-display
-	"SF Pro"
-	"Font used for titles, headings, and other non-fixed-width applications.")
-    #+END_SRC
-
+**** Leader Key
+     #+BEGIN_SRC emacs-lisp
+       (defconst utz/leader-key "SPC"
+	 "Like VIM's leader.")
+     #+END_SRC
+**** Local Leader Key
+     #+BEGIN_SRC emacs-lisp
+       (defconst utz/localleader-key ","
+	 "Like VIM's localleader.")
+     #+END_SRC
+**** Default Definer Keymaps
+     #+BEGIN_SRC emacs-lisp
+       (defconst utz/default-definer-keymaps '(normal insert visual emacs)
+	 "The default evil modes used in my custom definer")
+     #+END_SRC
+**** Init File
+     #+BEGIN_SRC emacs-lisp
+       (defconst utz/init-file
+	 (expand-file-name "init.el" user-emacs-directory)
+	 "File where Utzmacs is bootstrapped.")
+     #+END_SRC
+**** Config File
+     #+BEGIN_SRC emacs-lisp
+       (defconst utz/config-file
+	 (expand-file-name "utzmacs.org" user-emacs-directory)
+	 "This file.")
+     #+END_SRC
+**** Custom File
+     #+BEGIN_SRC emacs-lisp
+       (defconst utz/custom-file
+	 (cond ((boundp 'custom-file) custom-file)
+	       (t (expand-file-name "custom.el" user-emacs-directory)))
+	 "Where to store customizations.")
+     #+END_SRC
+**** Font Family Mono 
+     #+BEGIN_SRC emacs-lisp
+       (defconst utz/font-family-mono
+	 "SF Mono"
+	 "Fixed-width font used mostly for coding.")
+     #+END_SRC
+**** Font Family Display
+     #+BEGIN_SRC emacs-lisp
+       (defconst utz/font-family-display
+	 "SF Pro"
+	 "Font used for titles, headings, and other non-fixed-width applications.")
+     #+END_SRC
 *** Functions
-
 **** Load Config File
-
      #+BEGIN_SRC emacs-lisp
        (defun utz/load-config-file ()
 	 "(Re)load the configuration file."
 	 (interactive)
 	 (load utz/init-file nil 'nomessage))
      #+END_SRC
-
 **** Edit Init File
-
      #+BEGIN_SRC emacs-lisp
        (defun utz/edit-init-file ()
 	 "Edit the init file.
@@ -83,9 +76,7 @@
 			 (- 'find-file-other-window))))
 	   (funcall opener utz/init-file)))
      #+END_SRC
-
 **** Edit Config File
-
      #+BEGIN_SRC emacs-lisp
        (defun utz/edit-config-file ()
 	 "Edit this configuration file.
@@ -101,87 +92,69 @@
 			 (- 'find-file-other-window))))
 	   (funcall opener utz/config-file)))
      #+END_SRC
-
+*** Faces
+**** Org Levels
+     #+BEGIN_SRC emacs-lisp
+       (defface utz/org-levels
+	 `((t (:inherit 'default
+		       :family ,utz/font-family-display)))
+	 "Face for headline levels in Org.")
+     #+END_SRC
 ** Configuration
-
 *** UTF
-
     #+BEGIN_SRC emacs-lisp
       (setq-default buffer-file-coding-system 'utf-8-unix)
       (set-default-coding-systems 'utf-8-unix)
       (setq locale-coding-system 'utf-8-unix)
       (prefer-coding-system 'utf-8-unix)
     #+END_SRC
-
 *** Tool Bar Mode
-
     #+BEGIN_SRC emacs-lisp
       (tool-bar-mode 0)
     #+END_SRC
-
 *** Line Numbers
-
     #+BEGIN_SRC emacs-lisp
       (global-display-line-numbers-mode 1)
       (setq display-line-numbers-type 'visual)
     #+END_SRC
-
 *** Show Paren Mode
-
     #+BEGIN_SRC emacs-lisp
       (show-paren-mode 1)
     #+END_SRC
-
 *** Menu Bar Mode
-
     #+BEGIN_SRC emacs-lisp
       (menu-bar-mode 0)
     #+END_SRC
-
 *** Scroll Bar Mode
-
     #+BEGIN_SRC emacs-lisp
       (scroll-bar-mode 0)
     #+END_SRC
-
 *** Startup Screen
-
     #+BEGIN_SRC emacs-lisp
       (setq inhibit-startup-screen t
 	    initial-scratch-message nil)
       (add-to-list 'default-frame-alist '(fullscreen . maximized))
     #+END_SRC
-
 *** Local Variables
-
     #+BEGIN_SRC emacs-lisp
       (setq enable-local-variables :safe)
     #+END_SRC
-
 *** Fonts
-
     #+BEGIN_SRC emacs-lisp
       (custom-set-faces
        '(default ((t (:family "BlexMono Nerd Font"
 			      :height 130
 			      :weight normal)))))
     #+END_SRC
-
 * Install & Configure Packages
-
 ** Setup
-
 *** Use Package
-
     #+BEGIN_SRC emacs-lisp
       (straight-use-package 'use-package)
       (require 'use-package)
     #+END_SRC
-
 ** Install & Configure
-
 *** General
-
     #+BEGIN_SRC emacs-lisp
       (use-package general
 	:straight t
@@ -192,12 +165,10 @@
 	  :prefix utz/leader-key
 	  :non-normal-prefix (concat "M-" utz/leader-key)
 	  :keymaps utz/default-definer-keymaps)
-
 	;; Setup Definer for Local Leader Key
 	(general-create-definer utz/set-localleader-key
 	  :prefix utz/localleader-key
 	  :non-normal-prefix (concat "M-" utz/localleader-key))
-
 	;; Define keys not associated with packages
 	(utz/set-leader-key
 	  "b n" '(next-buffer :wk "Next Buffer")
@@ -211,20 +182,16 @@
 	  "f s" '(save-buffer :wk "Save File")
 	  "f" '(:ignore t :wk "File")
 	  "g" '(:ignore t :wk "Git")
-	  "h ," '(describe-face :wk "Describe Face")
 	  "h e" '(emacs-index-search :wk "Search Emacs Manual")
 	  "h l" '(elisp-index-search :wk "Search Elisp Manual")
 	  "q" '(:ignore t :wk "Quit")
 	  "u" '(universal-argument :wk "Universal Argument")
 	  "w" `(,(general-simulate-key "C-w") :wk "Window"))
-
 	;; Define Universal Argument Map Keys
 	(general-define-key :keymaps 'universal-argument-map
 			    (concat utz/leader-key " u") 'universal-argument-more))
     #+END_SRC
-
 *** Evil
-  
     #+BEGIN_SRC emacs-lisp
       (use-package evil
 	:straight t
@@ -242,9 +209,7 @@
 	(evil-set-initial-state 'helpful-mode 'motion)
 	(evil-mode 1))
     #+END_SRC
-
 **** Evil Surround
-
      #+BEGIN_SRC emacs-lisp
        (use-package evil-surround
 	 :straight t
@@ -252,9 +217,7 @@
 	 :config
 	 (global-evil-surround-mode 1))
      #+END_SRC
-
 **** Evil Collection
-
      #+BEGIN_SRC emacs-lisp
        (use-package evil-collection
 	 :straight t
@@ -262,9 +225,7 @@
 	 :config
 	 (evil-collection-init))
      #+END_SRC
-
 *** Flycheck
-
     #+BEGIN_SRC emacs-lisp
       (use-package flycheck
 	:straight t
@@ -274,9 +235,7 @@
 	:config
 	(global-flycheck-mode))
     #+END_SRC
-
 *** Company
-
     #+BEGIN_SRC emacs-lisp
       (use-package company
 	:straight t
@@ -339,8 +298,21 @@
     #+BEGIN_SRC emacs-lisp
       (use-package org
 	:straight t
+	:general
+	(utz/set-leader-key :infix "o"
+	  "a SPC" '(org-agenda :wk "Org Agenda")
+	  "a" '(:ignore t :wk "Agenda"))
 	:custom
-	(org-confirm-babel-evaluate nil))
+	(org-confirm-babel-evaluate nil)
+	:custom-face
+	(org-level-1 ((t (:inherit (outline-1 utz/org-levels)
+				    :height 200))))
+	(org-level-2 ((t (:inherit (outline-2 utz/org-levels)
+				    :height 180))))
+	(org-level-3 ((t (:inherit (outline-3 utz/org-levels)
+				   :height 160))))
+	(org-level-4 ((t (:inherit (outline-4 utz/org-levels)
+				   :height 140)))))
     #+END_SRC
 
 **** Org Bullets
@@ -351,7 +323,6 @@
 	 :after org
 	 :hook (org-mode . org-bullets-mode))
      #+END_SRC
-
 
 *** Helpful
 
@@ -407,15 +378,20 @@
     #+BEGIN_SRC emacs-lisp
       (use-package counsel
 	:straight t
+	:custom-face
+	`(ivy-current-match ((t (:inherit 'default
+					 :background ,(face-attribute 'default :foreground)
+					 :foreground ,(face-attribute 'default :background)))))
 	:general
 	("C-s" '(swiper-isearch :wk "Search")
 	 "C-x C-b" '(ivy-switch-buffer :wk "Switch Buffer"))
 	(utz/set-leader-key
-	  "SPC" '(counsel-M-x :wk "M-x")
 	  "/" '(swiper-isearch :wk "Search")
+	  "SPC" '(counsel-M-x :wk "M-x")
 	  "b b" '(ivy-switch-buffer :wk "List Buffers")
+	  "f /" '(swiper-isearch :wk "Search in File")
 	  "f f" '(counsel-find-file :wk "Find File")
-	  "f /" '(swiper-isearch :wk "Search in File"))
+	  "h ," '(counsel-describe-face :wk "Describe Face"))
 	:config
 	(setq ivy-use-virtual-buffers t)
 	(setq ivy-count-format "(%d/%d) ")
