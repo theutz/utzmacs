@@ -59,18 +59,17 @@
 
 ;; Evil
 
-(use-package evil
-  :demand t
-  :custom
-  (evil-split-window-below t)
-  (evil-vsplit-window-right t)
-  (evil-want-C-u-scroll t)
-  (evil-want-C-u-delete t)
-  (evil-want-C-w-in-emacs-state t)
-  (evil-shift-width 2)
-  (evil-want-keybinding nil)
-  (evil-want-integration t)
-  :config
+(straight-use-package 'evil)
+(setq-default evil-split-window-below t
+	      evil-vsplit-window-right t
+	      evil-want-C-u-scroll t
+	      evil-want-C-u-delete t
+	      evil-want-C-w-in-emacs-state t
+	      evil-shift-width 2
+	      evil-want-keybinding nil
+	      evil-want-integration t)
+(require 'evil)
+(with-eval-after-load 'evil
   (evil-set-initial-state 'helpful-mode 'motion)
   (evil-mode 1))
 
@@ -79,14 +78,16 @@
 (straight-use-package 'evil-surround)
 (with-eval-after-load 'evil
   (require 'evil-surround)
-  (global-evil-surround-mode 1))
+  (with-eval-after-load 'evil-surround
+    (global-evil-surround-mode 1)))
 
 ;; Evil Collection
 
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
+(straight-use-package 'evil-collection)
+(with-eval-after-load 'evil
+  (require 'evil-collection)
+  (with-eval-after-load 'evil-collection
+    (evil-collection-init)))
 
 
 
