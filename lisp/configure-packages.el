@@ -74,15 +74,23 @@
   (evil-set-initial-state 'helpful-mode 'motion)
   (evil-mode 1))
 
+;; Evil Surround
+
 (straight-use-package 'evil-surround)
 (with-eval-after-load 'evil
   (require 'evil-surround)
   (global-evil-surround-mode 1))
 
+;; Evil Collection
+
 (use-package evil-collection
   :after evil
   :config
   (evil-collection-init))
+
+
+
+;; Flycheck
 
 (use-package flycheck
   :functions global-flycheck-mode
@@ -91,10 +99,18 @@
   :config
   (global-flycheck-mode))
 
+
+
+;; Company
+
 (use-package company
   :hook (after-init . global-company-mode)
   :general
   ("C-SPC" '(company-complete :wk "Company Complete")))
+
+
+
+;; Which Key
 
 (use-package which-key
   :demand t
@@ -110,10 +126,18 @@
   :config
   (which-key-mode))
 
+
+
+;; Restart Emacs
+
 (use-package restart-emacs
   :general
   (utz/set-leader-key
     "q r" '(restart-emacs :wk "Restart Emacs")))
+
+
+
+;; Magit
 
 (use-package magit
   :general
@@ -122,8 +146,14 @@
     "RET" '(magit-dispatch :wk "Magit Dispatch")
     "s" '(magit-stage-file :wk "Magit Stage File")))
 
+;; Evil Magit
+
 (use-package evil-magit
   :after (evil magit))
+
+
+
+;; Org
 
 (use-package org
   :straight org-plus-contrib
@@ -142,9 +172,13 @@
   ;; is loaded, use `init.el';
   :config)
 
+;; Org Bullets
+
 (use-package org-bullets
   :after org
   :hook (org-mode . org-bullets-mode))
+
+;; Org Mac iCal
 
 (use-package org-mac-iCal
   :straight (org-mac-iCal :type git :host github :repo "ndw/org-mac-iCal"
@@ -152,6 +186,10 @@
 				       :repo "theutz/org-mac-iCal"))
   :custom
   (org-mac-iCal-calendar-names '("Personal")))
+
+
+
+;; Helpful
 
 (use-package helpful
   :general
@@ -162,6 +200,10 @@
     "f" '(helpful-callable :wk "Helpful Callable")
     "k" '(helpful-key :wk "Helpful Key")
     "v" '(helpful-variable :wk "Helpful Variable")))
+
+
+
+;; Doom Themes
 
 (use-package doom-themes
   :custom
@@ -175,12 +217,24 @@
   ;;(doom-themes-treemacs-config)
   (doom-themes-org-config))
 
+
+
+;; YASnippet
+
 (use-package yasnippet
   :config
   (yas-global-mode 1))
 
+
+
+;; WS Butler
+
 (use-package ws-butler
   :hook (prog-mode . ws-butler-mode))
+
+
+
+;; Counsel / Ivy / Swiper
 
 (use-package counsel
   :custom-face
@@ -202,9 +256,15 @@
   (setq ivy-count-format "(%d/%d) ")
   (ivy-mode 1))
 
+
+
+;; Hydra
+
 (use-package hydra)
 
 (use-package ivy-hydra)
+
+
 
 (provide 'configure-packages)
 
