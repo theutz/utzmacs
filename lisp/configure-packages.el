@@ -64,9 +64,9 @@
   (evil-set-initial-state 'helpful-mode 'motion)
   (evil-mode 1))
 
-(use-package evil-surround
-  :after evil
-  :config
+(straight-use-package 'evil-surround)
+(with-eval-after-load 'evil
+  (require 'evil-surround)
   (global-evil-surround-mode 1))
 
 (use-package evil-collection
