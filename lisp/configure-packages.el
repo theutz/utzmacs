@@ -6,10 +6,13 @@
 
 (require 'define-utz-namespace)
 
-(use-package gcmh
-  :demand t
-  :config
-  (gcmh-mode 1))
+;; Garbage Collection Magic Hook
+
+(straight-use-package 'gcmh)
+(require 'gcmh)
+(gcmh-mode 1)
+
+
 
 (use-package general
   :config
