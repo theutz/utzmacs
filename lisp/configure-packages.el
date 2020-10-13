@@ -4,24 +4,28 @@
 ;;
 ;;; Code:
 
+(require 'define-utz-namespace)
+
 (use-package gcmh
   :demand t
   :config
   (gcmh-mode 1))
 
 (use-package general
-  :straight t
   :config
   (general-auto-unbind-keys)
+
   ;; Setup Definer for Leader Key
   (general-create-definer utz/set-leader-key
     :prefix utz/leader-key
     :non-normal-prefix (concat "M-" utz/leader-key)
     :keymaps utz/default-definer-keymaps)
+
   ;; Setup Definer for Local Leader Key
   (general-create-definer utz/set-localleader-key
     :prefix utz/localleader-key
     :non-normal-prefix (concat "M-" utz/localleader-key))
+
   ;; Define keys not associated with packages
   (utz/set-leader-key
     "b d" '(kill-this-buffer :wk "Kill Buffer")
@@ -46,7 +50,6 @@
 		      (concat utz/leader-key " u") 'universal-argument-more))
 
 (use-package evil
-  :straight t
   :demand t
   :custom
   (evil-split-window-below t)
@@ -62,19 +65,16 @@
   (evil-mode 1))
 
 (use-package evil-surround
-  :straight t
   :after evil
   :config
   (global-evil-surround-mode 1))
 
 (use-package evil-collection
-  :straight t
   :after evil
   :config
   (evil-collection-init))
 
 (use-package flycheck
-  :straight t
   :functions global-flycheck-mode
   :custom
   (flycheck-emacs-lisp-load-path 'inherit)
@@ -82,13 +82,11 @@
   (global-flycheck-mode))
 
 (use-package company
-  :straight t
   :hook (after-init . global-company-mode)
   :general
   ("C-SPC" '(company-complete :wk "Company Complete")))
 
 (use-package which-key
-  :straight t
   :demand t
   :functions which-key-mode
   :general
@@ -103,13 +101,11 @@
   (which-key-mode))
 
 (use-package restart-emacs
-  :straight t
   :general
   (utz/set-leader-key
     "q r" '(restart-emacs :wk "Restart Emacs")))
 
 (use-package magit
-  :straight t
   :general
   (utz/set-leader-key :infix "g"
     "SPC" '(magit-status :wk "Magit Status")
@@ -117,7 +113,6 @@
     "s" '(magit-stage-file :wk "Magit Stage File")))
 
 (use-package evil-magit
-  :straight t
   :after (evil magit))
 
 (use-package org
@@ -138,7 +133,6 @@
   :config)
 
 (use-package org-bullets
-  :straight t
   :after org
   :hook (org-mode . org-bullets-mode))
 
@@ -150,7 +144,6 @@
   (org-mac-iCal-calendar-names '("Personal")))
 
 (use-package helpful
-  :straight t
   :general
   (utz/set-leader-key :infix "h"
     "SPC" '(helpful-at-point :wk "Helpful At Point")
@@ -161,7 +154,6 @@
     "v" '(helpful-variable :wk "Helpful Variable")))
 
 (use-package doom-themes
-  :straight t
   :custom
   (doom-themes-enable-bold t)
   (doom-themes-enable-italic t)
@@ -174,20 +166,17 @@
   (doom-themes-org-config))
 
 (use-package yasnippet
-  :straight t
   :config
   (yas-global-mode 1))
 
 (use-package ws-butler
-  :straight t
   :hook (prog-mode . ws-butler-mode))
 
 (use-package counsel
-  :straight t
   :custom-face
   (ivy-current-match ((t (:inherit 'default
-				    :background ,(face-attribute 'default :foreground)
-				    :foreground ,(face-attribute 'default :background)))))
+				   :background ,(face-attribute 'default :foreground)
+				   :foreground ,(face-attribute 'default :background)))))
   :general
   ("C-s" '(swiper-isearch :wk "Search")
    "C-x C-b" '(ivy-switch-buffer :wk "Switch Buffer"))
@@ -203,11 +192,9 @@
   (setq ivy-count-format "(%d/%d) ")
   (ivy-mode 1))
 
-(use-package hydra
-  :straight t)
+(use-package hydra)
 
-(use-package ivy-hydra
-  :straight t)
+(use-package ivy-hydra)
 
 (provide 'configure-packages)
 
