@@ -28,7 +28,7 @@
     "b n" '(next-buffer :wk "Next Buffer")
     "b p" '(previous-buffer :wk "Previous Buffer")
     "b" '(:ignore t :wk "Buffer")
-    "f e R" '(utz/load-config-file :wk "Reload Config File")
+    "f e R" '(utz/load-init-file :wk "Reload Config File")
     "f e i" '(utz/edit-init-file :wk "Edit Init File")
     "f e r" '(utz/edit-config-file :wk "Edit Config File")
     "f e" '(:ignore t :wk "Emacs")
@@ -185,7 +185,7 @@
 (use-package counsel
   :straight t
   :custom-face
-  `(ivy-current-match ((t (:inherit 'default
+  (ivy-current-match ((t (:inherit 'default
 				    :background ,(face-attribute 'default :foreground)
 				    :foreground ,(face-attribute 'default :background)))))
   :general
