@@ -103,10 +103,12 @@
 
 ;; Company
 
-(use-package company
-  :hook (after-init . global-company-mode)
-  :general
-  ("C-SPC" '(company-complete :wk "Company Complete")))
+(straight-use-package 'company)
+(require 'company)
+(with-eval-after-load 'company
+  (add-hook 'after-init-hook 'global-company-mode)
+  (with-eval-after-load 'general
+    (general-define-key "C-SPC" '(company-complete :wk "Company Complete"))))
 
 
 
