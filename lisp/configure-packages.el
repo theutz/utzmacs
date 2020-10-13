@@ -93,11 +93,10 @@
 
 ;; Flycheck
 
-(use-package flycheck
-  :functions global-flycheck-mode
-  :custom
-  (flycheck-emacs-lisp-load-path 'inherit)
-  :config
+(straight-use-package 'flycheck)
+(setq-default flycheck-emacs-lisp-load-path 'inherit)
+(require 'flycheck)
+(with-eval-after-load 'flycheck
   (global-flycheck-mode))
 
 
