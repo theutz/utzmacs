@@ -23,6 +23,7 @@
 
   ;; Setup straight.el
   (defvar bootstrap-version)
+  (setq straight-fix-flycheck t)
   (let ((bootstrap-file
 	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
 	(bootstrap-version 5))
@@ -35,13 +36,15 @@
 	(eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage))
 
-  ;; Setup org
-  (straight-use-package 'org)
-  (require 'org)
+  ;; Setup use-package
+  (straight-use-package 'use-package)
 
-  ;; Require my literate config
-  (org-babel-load-file
-   (expand-file-name "utzmacs.org" user-emacs-directory))
+  ;; Setup org
+  (use-package org
+    :straight org-plus-contrib
+    :config
+    (org-babel-load-file
+     (expand-file-name "utzmacs.org" user-emacs-directory)))
 
   (garbage-collect))
 

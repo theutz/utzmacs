@@ -3,522 +3,491 @@
 #+EMAIL: michael@theutz.com
 #+STARTUP: content
 
-* Configure Emacs
-
-** Definitions
-
-*** Variables
-
-**** Utz Customization Group
-
-     #+BEGIN_SRC emacs-lisp
-       (defgroup utz nil
-	 "All my customization options."
-	 :group 'convenience)
-     #+END_SRC
-
-**** Leader Key
-
-     #+BEGIN_SRC emacs-lisp
-       (defcustom utz/leader-key "SPC"
-	 "Like VIM's leader."
-	 :type 'string
-	 :initialize 'custom-initialize-default
-	 :group 'utz)
-     #+END_SRC
-
-**** Local Leader Key
-
-     #+BEGIN_SRC emacs-lisp
-       (defcustom utz/localleader-key ","
-	 "Like VIM's localleader."
-	 :type 'string
-	 :initialize 'custom-initialize-default
-	 :group 'utz)
-     #+END_SRC
-
-**** Default Definer Keymaps
-
-     #+BEGIN_SRC emacs-lisp
-       (defcustom utz/default-definer-keymaps '(normal insert visual emacs)
-	 "The default evil modes used in my custom definer"
-	 :type '(repeat symbol)
-	 :initialize 'custom-initialize-default
-	 :group 'utz)
-     #+END_SRC
-
-**** Init File
-
-     #+BEGIN_SRC emacs-lisp
-       (defcustom utz/init-file (expand-file-name "init.el" user-emacs-directory)
-	 "File where Utzmacs is bootstrapped."
-	 :type 'file
-	 :initialize 'custom-initialize-default
-	 :group 'utz)
-     #+END_SRC
-
-**** Config File
-
-     #+BEGIN_SRC emacs-lisp
-       (defcustom utz/config-file (expand-file-name "utzmacs.org" user-emacs-directory)
-	 "This file."
-	 :type 'file
-	 :initialize 'custom-initialize-default
-	 :group 'utz)
-     #+END_SRC
-
-**** Custom File
-
-     #+BEGIN_SRC emacs-lisp
-       (defcustom utz/custom-file (cond ((boundp 'custom-file) custom-file)
-					(t (expand-file-name "custom.el" user-emacs-directory)))
-	 "Where to store customizations."
-	 :type 'file
-	 :initialize 'custom-initialize-default
-	 :group 'utz)
-     #+END_SRC
-
-*** Functions
-
-**** Load Config File
-
-     #+BEGIN_SRC emacs-lisp
-       (defun utz/load-config-file ()
-	 "(Re)load the configuration file."
-	 (interactive)
-	 (load utz/init-file nil 'nomessage))
-     #+END_SRC
-
-**** Edit Init File
-
-     #+BEGIN_SRC emacs-lisp
-       (defun utz/edit-init-file ()
-	 "Edit the init file.
-
-       By default, this command opens your config file
-       in another window.
-
-       If called interactively, press `C-u' once to
-       open it in the same window."
-	 (interactive)
-	 (let ((opener (pcase current-prefix-arg
-			 ('(4) 'find-file)
-			 (- 'find-file-other-window))))
-	   (funcall opener utz/init-file)))
-     #+END_SRC
-
-**** Edit Config File
-
-     #+BEGIN_SRC emacs-lisp
-       (defun utz/edit-config-file ()
-	 "Edit this configuration file.
-
-       By default, this command opens your config
-       file in another window.
-
-       If called interactively, press `C-u' once to
-       open it in the same window."
-	 (interactive)
-	 (let ((opener (pcase current-prefix-arg
-			 ('(4) 'find-file)
-			 (- 'find-file-other-window))))
-	   (funcall opener utz/config-file)))
-     #+END_SRC
-
-*** Faces
-
-**** Utz Faces Customization Group
-
-     #+BEGIN_SRC emacs-lisp
-       (defgroup utz/faces nil
-	 "All my face customizations."
-	 :group 'faces)
-     #+END_SRC
-
-**** Display Font
-
-     #+BEGIN_SRC emacs-lisp
-       (defface utz/display-font '((t (:inherit 'default :family "SF Pro")))
-	 "Face for titles, headings and other non-fixed-width applications."
-	 :group 'utz/faces)
-     #+END_SRC
-
-**** Fixed Width Font
-
-     #+BEGIN_SRC emacs-lisp
-       (defface utz/fixed-width-font '((t (:inherit 'default :family "BlexMono Nerd Font")))
-	 "Face for code and other fixed-width applications."
-	 :group 'utz/faces)
-     #+END_SRC
-
-**** Org Levels
-
-     #+BEGIN_SRC emacs-lisp
-       (defface utz/org-levels
-	 '((t (:inherit (utz/display-font default))))
-	 "Face for headline levels in Org."
-	 :group 'utz/faces)
-     #+END_SRC
-
-** Configuration
-
-*** UTF
+* Personal
+** Variables
+*** Utz Customization Group
 
     #+BEGIN_SRC emacs-lisp
-      (setq-default buffer-file-coding-system 'utf-8-unix)
-      (set-default-coding-systems 'utf-8-unix)
-      (setq locale-coding-system 'utf-8-unix)
-      (prefer-coding-system 'utf-8-unix)
+      (defgroup utz nil
+	"All my customization options."
+	:group 'convenience)
     #+END_SRC
 
-*** Tool Bar Mode
+*** Leader Key
 
     #+BEGIN_SRC emacs-lisp
-      (tool-bar-mode 0)
+      (defcustom utz/leader-key "SPC"
+	"Like VIM's leader."
+	:type 'string
+	:initialize 'custom-initialize-default
+	:group 'utz)
     #+END_SRC
 
-*** Line Numbers
+*** Local Leader Key
 
     #+BEGIN_SRC emacs-lisp
-      (global-display-line-numbers-mode 1)
-      (setq display-line-numbers-type 'visual)
+      (defcustom utz/localleader-key ","
+	"Like VIM's localleader."
+	:type 'string
+	:initialize 'custom-initialize-default
+	:group 'utz)
     #+END_SRC
 
-*** Show Paren Mode
+*** Default Definer Keymaps
 
     #+BEGIN_SRC emacs-lisp
-      (show-paren-mode 1)
+      (defcustom utz/default-definer-keymaps '(normal insert visual emacs)
+	"The default evil modes used in my custom definer"
+	:type '(repeat symbol)
+	:initialize 'custom-initialize-default
+	:group 'utz)
     #+END_SRC
 
-*** Menu Bar Mode
+*** Init File
 
     #+BEGIN_SRC emacs-lisp
-      (menu-bar-mode 0)
+      (defcustom utz/init-file (expand-file-name "init.el" user-emacs-directory)
+	"File where Utzmacs is bootstrapped."
+	:type 'file
+	:initialize 'custom-initialize-default
+	:group 'utz)
     #+END_SRC
 
-*** Scroll Bar Mode
+*** Config File
 
     #+BEGIN_SRC emacs-lisp
-      (scroll-bar-mode 0)
+      (defcustom utz/config-file (expand-file-name "utzmacs.org" user-emacs-directory)
+	"This file."
+	:type 'file
+	:initialize 'custom-initialize-default
+	:group 'utz)
     #+END_SRC
 
-*** Startup Screen
+*** Custom File
 
     #+BEGIN_SRC emacs-lisp
-      (setq inhibit-startup-screen t
-	    initial-scratch-message nil)
-      (add-to-list 'default-frame-alist '(fullscreen . maximized))
+      (defcustom utz/custom-file (cond ((boundp 'custom-file) custom-file)
+				       (t (expand-file-name "custom.el" user-emacs-directory)))
+	"Where to store customizations."
+	:type 'file
+	:initialize 'custom-initialize-default
+	:group 'utz)
     #+END_SRC
 
-*** Local Variables
+** Functions
+
+*** Load Config File
 
     #+BEGIN_SRC emacs-lisp
-      (setq enable-local-variables :safe)
+      (defun utz/load-config-file ()
+	"(Re)load the configuration file."
+	(interactive)
+	(load utz/init-file nil 'nomessage))
     #+END_SRC
 
-*** Fonts
+*** Edit Init File
 
     #+BEGIN_SRC emacs-lisp
-      (custom-set-faces `(default
-			   ((t (:family ,(face-attribute 'utz/fixed-width-font :family)
-					:height 120)))))
+      (defun utz/edit-init-file ()
+	"Edit the init file.
+
+      By default, this command opens your config file
+      in another window.
+
+      If called interactively, press `C-u' once ton
+      open it in the same window."
+	(interactive)
+	(let ((opener (pcase current-prefix-arg
+			('(4) 'find-file)
+			(- 'find-file-other-window))))
+	  (funcall opener utz/init-file)))
     #+END_SRC
 
-* Install & Configure Packages
-
-** Setup
-
-*** Use Package
+*** Edit Config File
 
     #+BEGIN_SRC emacs-lisp
-      (straight-use-package 'use-package)
-      (require 'use-package)
+      (defun utz/edit-config-file ()
+	"Edit this configuration file.
+
+      By default, this command opens your config
+      file in another window.
+
+      If called interactively, press `C-u' once to
+      open it in the same window."
+	(interactive)
+	(let ((opener (pcase current-prefix-arg
+			('(4) 'find-file)
+			(- 'find-file-other-window))))
+	  (funcall opener utz/config-file)))
     #+END_SRC
 
-** Install & Configure
-
-*** General
+** Faces
+*** Utz Faces Customization Group
 
     #+BEGIN_SRC emacs-lisp
-      (use-package general
+      (defgroup utz/faces nil
+	"All my face customizations."
+	:group 'faces)
+    #+END_SRC
+
+*** Display Font
+
+    #+BEGIN_SRC emacs-lisp
+      (defface utz/display-font '((t (:inherit 'default :family "SF Pro")))
+	"Face for titles, headings and other non-fixed-width applications."
+	:group 'utz/faces)
+    #+END_SRC
+
+*** Fixed Width Font
+
+    #+BEGIN_SRC emacs-lisp
+      (defface utz/fixed-width-font '((t (:inherit 'default :family "BlexMono Nerd Font")))
+	"Face for code and other fixed-width applications."
+	:group 'utz/faces)
+    #+END_SRC
+
+* Emacs
+** UTF
+
+   #+BEGIN_SRC emacs-lisp
+     (setq-default buffer-file-coding-system 'utf-8-unix)
+     (set-default-coding-systems 'utf-8-unix)
+     (setq locale-coding-system 'utf-8-unix)
+     (prefer-coding-system 'utf-8-unix)
+   #+END_SRC
+
+** Tool Bar Mode
+
+   #+BEGIN_SRC emacs-lisp
+     (tool-bar-mode 0)
+   #+END_SRC
+
+** Line Numbers
+
+   #+BEGIN_SRC emacs-lisp
+     (global-display-line-numbers-mode 1)
+     (setq display-line-numbers-type 'visual)
+   #+END_SRC
+
+** Show Paren Mode
+
+   #+BEGIN_SRC emacs-lisp
+     (show-paren-mode 1)
+   #+END_SRC
+
+** Menu Bar Mode
+
+   #+BEGIN_SRC emacs-lisp
+     (menu-bar-mode 0)
+   #+END_SRC
+
+** Scroll Bar Mode
+
+   #+BEGIN_SRC emacs-lisp
+     (scroll-bar-mode 0)
+   #+END_SRC
+
+** Startup Screen
+
+   #+BEGIN_SRC emacs-lisp
+     (setq inhibit-startup-screen t
+	   initial-scratch-message nil)
+     (add-to-list 'default-frame-alist '(fullscreen . maximized))
+   #+END_SRC
+
+** Local Variables
+
+   #+BEGIN_SRC emacs-lisp
+     (setq enable-local-variables :safe)
+   #+END_SRC
+
+** Fonts
+
+   #+BEGIN_SRC emacs-lisp
+     (custom-set-faces `(default
+			  ((t (:family ,(face-attribute 'utz/fixed-width-font :family)
+				       :height 120)))))
+   #+END_SRC
+
+* Packages
+** General
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package general
+       :straight t
+       :config
+       (general-auto-unbind-keys)
+       ;; Setup Definer for Leader Key
+       (general-create-definer utz/set-leader-key
+	 :prefix utz/leader-key
+	 :non-normal-prefix (concat "M-" utz/leader-key)
+	 :keymaps utz/default-definer-keymaps)
+       ;; Setup Definer for Local Leader Key
+       (general-create-definer utz/set-localleader-key
+	 :prefix utz/localleader-key
+	 :non-normal-prefix (concat "M-" utz/localleader-key))
+       ;; Define keys not associated with packages
+       (utz/set-leader-key
+	 "b d" '(kill-this-buffer :wk "Kill Buffer")
+	 "b n" '(next-buffer :wk "Next Buffer")
+	 "b p" '(previous-buffer :wk "Previous Buffer")
+	 "b" '(:ignore t :wk "Buffer")
+	 "f e R" '(utz/load-config-file :wk "Reload Config File")
+	 "f e i" '(utz/edit-init-file :wk "Edit Init File")
+	 "f e r" '(utz/edit-config-file :wk "Edit Config File")
+	 "f e" '(:ignore t :wk "Emacs")
+	 "f r" '(revert-buffer :wk "Revert File")
+	 "f s" '(save-buffer :wk "Save File")
+	 "f" '(:ignore t :wk "File")
+	 "g" '(:ignore t :wk "Git")
+	 "h e" '(emacs-index-search :wk "Search Emacs Manual")
+	 "h l" '(elisp-index-search :wk "Search Elisp Manual")
+	 "q" '(:ignore t :wk "Quit")
+	 "u" '(universal-argument :wk "Universal Argument")
+	 "w" `(,(general-simulate-key "C-w") :wk "Window"))
+       ;; Define Universal Argument Map Keys
+       (general-define-key :keymaps 'universal-argument-map
+			   (concat utz/leader-key " u") 'universal-argument-more))
+   #+END_SRC
+
+** Evil
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package evil
+       :straight t
+       :demand t
+       :custom
+       (evil-split-window-below t)
+       (evil-vsplit-window-right t)
+       (evil-want-C-u-scroll t)
+       (evil-want-C-u-delete t)
+       (evil-want-C-w-in-emacs-state t)
+       (evil-shift-width 2)
+       (evil-want-keybinding nil)
+       (evil-want-integration t)
+       :config
+       (evil-set-initial-state 'helpful-mode 'motion)
+       (evil-mode 1))
+   #+END_SRC
+
+*** Evil Surround
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package evil-surround
 	:straight t
+	:after evil
 	:config
-	(general-auto-unbind-keys)
-	;; Setup Definer for Leader Key
-	(general-create-definer utz/set-leader-key
-	  :prefix utz/leader-key
-	  :non-normal-prefix (concat "M-" utz/leader-key)
-	  :keymaps utz/default-definer-keymaps)
-	;; Setup Definer for Local Leader Key
-	(general-create-definer utz/set-localleader-key
-	  :prefix utz/localleader-key
-	  :non-normal-prefix (concat "M-" utz/localleader-key))
-	;; Define keys not associated with packages
-	(utz/set-leader-key
-	  "b n" '(next-buffer :wk "Next Buffer")
-	  "b p" '(previous-buffer :wk "Previous Buffer")
-	  "b" '(:ignore t :wk "Buffer")
-	  "f e R" '(utz/load-config-file :wk "Reload Config File")
-	  "f e i" '(utz/edit-init-file :wk "Edit Init File")
-	  "f e r" '(utz/edit-config-file :wk "Edit Config File")
-	  "f e" '(:ignore t :wk "Emacs")
-	  "f r" '(revert-buffer :wk "Revert File")
-	  "f s" '(save-buffer :wk "Save File")
-	  "f" '(:ignore t :wk "File")
-	  "g" '(:ignore t :wk "Git")
-	  "h e" '(emacs-index-search :wk "Search Emacs Manual")
-	  "h l" '(elisp-index-search :wk "Search Elisp Manual")
-	  "q" '(:ignore t :wk "Quit")
-	  "u" '(universal-argument :wk "Universal Argument")
-	  "w" `(,(general-simulate-key "C-w") :wk "Window"))
-	;; Define Universal Argument Map Keys
-	(general-define-key :keymaps 'universal-argument-map
-			    (concat utz/leader-key " u") 'universal-argument-more))
+	(global-evil-surround-mode 1))
     #+END_SRC
 
-*** Evil
+*** Evil Collection
 
     #+BEGIN_SRC emacs-lisp
-      (use-package evil
+      (use-package evil-collection
 	:straight t
-	:demand t
+	:after evil
+	:config
+	(evil-collection-init))
+    #+END_SRC
+
+** Flycheck
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package flycheck
+       :straight t
+       :functions global-flycheck-mode
+       :custom
+       (flycheck-emacs-lisp-load-path 'inherit)
+       :config
+       (global-flycheck-mode))
+   #+END_SRC
+
+** Company
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package company
+       :straight t
+       :hook (after-init . global-company-mode)
+       :general
+       ("C-SPC" '(company-complete :wk "Company Complete")))
+   #+END_SRC
+
+** Which Key
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package which-key
+       :straight t
+       :demand t
+       :functions which-key-mode
+       :general
+       (utz/set-leader-key :infix "h"
+	 "K" '(which-key-show-top-level :wk "Which Key Show Top Level")
+	 "M" '(which-key-show-major-mode :wk "Which Key Show Major Mode"))
+       :custom
+       (which-key-idle-delay 0.3)
+       (which-key-max-description-length 40)
+       (which-key-add-column-padding 1)
+       :config
+       (which-key-mode))
+   #+END_SRC
+
+** Restart Emacs
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package restart-emacs
+       :straight t
+       :general
+       (utz/set-leader-key
+	 "q r" '(restart-emacs :wk "Restart Emacs")))
+   #+END_SRC
+
+** Magit
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package magit
+       :straight t
+       :general
+       (utz/set-leader-key :infix "g"
+	 "SPC" '(magit-status :wk "Magit Status")
+	 "RET" '(magit-dispatch :wk "Magit Dispatch")
+	 "s" '(magit-stage-file :wk "Magit Stage File")))
+   #+END_SRC
+
+*** Evil Magit
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package evil-magit
+	:straight t
+	:after (evil magit))
+    #+END_SRC
+
+** Org
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package org
+       :straight org-plus-contrib
+       :general
+       (utz/set-leader-key :infix "o"
+	 "a SPC" '(org-agenda :wk "Org Agenda")
+	 "a" '(:ignore t :wk "Agenda"))
+       :custom
+       (org-confirm-babel-evaluate nil)
+       (org-agenda-include-diary t)
+       (diary-file (expand-file-name "diary" org-directory))
+       :init
+       ;; `:init' here is ineffective, since org is loaded
+       ;; when tangling this file. To execute code before `org-mode'
+       ;; is loaded, use `init.el';
+       :config)
+   #+END_SRC
+
+*** Org Bullets
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package org-bullets
+	:straight t
+	:after org
+	:hook (org-mode . org-bullets-mode))
+    #+END_SRC
+
+*** Org Mac iCal
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package org-mac-iCal
+	:straight (org-mac-iCal :type git :host github :repo "ndw/org-mac-iCal"
+				:fork (:host github
+					     :repo "theutz/org-mac-iCal"))
 	:custom
-	(evil-split-window-below t)
-	(evil-vsplit-window-right t)
-	(evil-want-C-u-scroll t)
-	(evil-want-C-u-delete t)
-	(evil-want-C-w-in-emacs-state t)
-	(evil-shift-width 2)
-	(evil-want-keybinding nil)
-	(evil-want-integration t)
-	:config
-	(evil-set-initial-state 'helpful-mode 'motion)
-	(evil-mode 1))
+	(org-mac-iCal-calendar-names '("Personal")))
     #+END_SRC
 
-**** Evil Surround
+** Helpful
 
-     #+BEGIN_SRC emacs-lisp
-       (use-package evil-surround
-	 :straight t
-	 :after evil
-	 :config
-	 (global-evil-surround-mode 1))
-     #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package helpful
+       :straight t
+       :general
+       (utz/set-leader-key :infix "h"
+	 "SPC" '(helpful-at-point :wk "Helpful At Point")
+	 "C" '(helpful-command :wk "Helpful Command")
+	 "F" '(helpful-function :wk "Helpful Function")
+	 "f" '(helpful-callable :wk "Helpful Callable")
+	 "k" '(helpful-key :wk "Helpful Key")
+	 "v" '(helpful-variable :wk "Helpful Variable")))
+   #+END_SRC
 
-**** Evil Collection
+** Doom Themes
 
-     #+BEGIN_SRC emacs-lisp
-       (use-package evil-collection
-	 :straight t
-	 :after evil
-	 :config
-	 (evil-collection-init))
-     #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package doom-themes
+       :straight t
+       :custom
+       (doom-themes-enable-bold t)
+       (doom-themes-enable-italic t)
+       :config
+       (load-theme 'doom-outrun-electric t)
+       (doom-themes-visual-bell-config)
+       ;;(doom-themes-neotree-config)
+       ;;(setq doom-themes-treemacs-theme "doom-colors")
+       ;;(doom-themes-treemacs-config)
+       (doom-themes-org-config))
+   #+END_SRC
 
-*** Flycheck
+** YASnippet
 
-    #+BEGIN_SRC emacs-lisp
-      (use-package flycheck
-	:straight t
-	:functions global-flycheck-mode
-	:custom
-	(flycheck-emacs-lisp-load-path 'inherit)
-	:config
-	(global-flycheck-mode))
-    #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet
+       :straight t
+       :config
+       (yas-global-mode 1))
+   #+END_SRC
 
-*** Company
+** WS Butler
 
-    #+BEGIN_SRC emacs-lisp
-      (use-package company
-	:straight t
-	:hook (after-init . global-company-mode)
-	:general
-	("C-SPC" '(company-complete :wk "Company Complete")))
-    #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package ws-butler
+       :straight t
+       :hook (prog-mode . ws-butler-mode))
+   #+END_SRC
 
-*** Which Key
+** Ivy / Counsel / Swiper
 
-    #+BEGIN_SRC emacs-lisp
-      (use-package which-key
-	:straight t
-	:demand t
-	:functions which-key-mode
-	:general
-	(utz/set-leader-key :infix "h"
-	  "K" '(which-key-show-top-level :wk "Which Key Show Top Level")
-	  "M" '(which-key-show-major-mode :wk "Which Key Show Major Mode"))
-	:custom
-	(which-key-idle-delay 0.3)
-	(which-key-max-description-length 40)
-	(which-key-add-column-padding 1)
-	:config
-	(which-key-mode))
-    #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package counsel
+       :straight t
+       :custom-face
+       `(ivy-current-match ((t (:inherit 'default
+					 :background ,(face-attribute 'default :foreground)
+					 :foreground ,(face-attribute 'default :background)))))
+       :general
+       ("C-s" '(swiper-isearch :wk "Search")
+	"C-x C-b" '(ivy-switch-buffer :wk "Switch Buffer"))
+       (utz/set-leader-key
+	 "/" '(swiper-isearch :wk "Search")
+	 "SPC" '(counsel-M-x :wk "M-x")
+	 "b b" '(ivy-switch-buffer :wk "List Buffers")
+	 "f /" '(swiper-isearch :wk "Search in File")
+	 "f f" '(counsel-find-file :wk "Find File")
+	 "h ," '(counsel-describe-face :wk "Describe Face"))
+       :config
+       (setq ivy-use-virtual-buffers t)
+       (setq ivy-count-format "(%d/%d) ")
+       (ivy-mode 1))
+   #+END_SRC
 
-*** Restart Emacs
+** Hydra
 
-    #+BEGIN_SRC emacs-lisp
-      (use-package restart-emacs
-	:straight t
-	:general
-	(utz/set-leader-key
-	  "q r" '(restart-emacs :wk "Restart Emacs")))
-    #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package hydra
+       :straight t)
+   #+END_SRC
 
-*** Magit
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package magit
-	:straight t
-	:general
-	(utz/set-leader-key :infix "g"
-	  "SPC" '(magit-status :wk "Magit Status")
-	  "RET" '(magit-dispatch :wk "Magit Dispatch")
-	  "s" '(magit-stage-file :wk "Magit Stage File")))
-    #+END_SRC
-
-**** Evil Magit
-
-     #+BEGIN_SRC emacs-lisp
-       (use-package evil-magit
-	 :straight t
-	 :after (evil magit))
-     #+END_SRC
-
-*** Org
+*** Ivy Hydra
 
     #+BEGIN_SRC emacs-lisp
-      (use-package org
-	:straight t
-	:general
-	(utz/set-leader-key :infix "o"
-	  "a SPC" '(org-agenda :wk "Org Agenda")
-	  "a" '(:ignore t :wk "Agenda"))
-	:custom
-	(org-confirm-babel-evaluate nil)
-	:custom-face
-	(org-level-1 ((t (:inherit (outline-1 utz/org-levels)
-				   :height 220
-				   :weight ultra-bold))))
-	(org-level-2 ((t (:inherit (outline-2 utz/org-levels)
-				   :height 200
-				   :weight bold))))
-	(org-level-3 ((t (:inherit (outline-3 utz/org-levels)
-				   :height 180
-				   :weight semi-bold))))
-	(org-level-4 ((t (:inherit (outline-4 utz/org-levels)
-				   :height 160
-				   :weight normal))))
-	(org-level-5 ((t (:inherit (outline-5 utz/org-levels)
-				   :height 150
-				   :weight normal))))
-	(org-level-6 ((t (:inherit (outline-6 utz/org-levels)
-				   :height 140
-				   :weight normal))))
-	(org-level-7 ((t (:inherit (outline-7 utz/org-levels)
-				   :weight normal))))
-	(org-level-8 ((t (:inherit (outline-8 utz/org-levels)
-				   :weight normal)))))
-    #+END_SRC
-
-**** Org Bullets
-
-     #+BEGIN_SRC emacs-lisp
-       (use-package org-bullets
-	 :straight t
-	 :after org
-	 :hook (org-mode . org-bullets-mode))
-     #+END_SRC
-
-*** Helpful
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package helpful
-	:straight t
-	:general
-	(utz/set-leader-key :infix "h"
-	  "SPC" '(helpful-at-point :wk "Helpful At Point")
-	  "C" '(helpful-command :wk "Helpful Command")
-	  "F" '(helpful-function :wk "Helpful Function")
-	  "f" '(helpful-callable :wk "Helpful Callable")
-	  "k" '(helpful-key :wk "Helpful Key")
-	  "v" '(helpful-variable :wk "Helpful Variable")))
-    #+END_SRC
-
-*** Doom Themes
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package doom-themes
-	:straight t
-	:custom
-	(doom-themes-enable-bold t)
-	(doom-themes-enable-italic t)
-	:config
-	(load-theme 'doom-outrun-electric t)
-	(doom-themes-visual-bell-config)
-	;;(doom-themes-neotree-config)
-	;;(setq doom-themes-treemacs-theme "doom-colors")
-	;;(doom-themes-treemacs-config)
-	(doom-themes-org-config))
-    #+END_SRC
-
-*** YASnippet
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package yasnippet
-	:straight t
-	:config
-	(yas-global-mode 1))
-    #+END_SRC
-
-*** WS Butler
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package ws-butler
-	:straight t
-	:hook (prog-mode . ws-butler-mode))
-    #+END_SRC
-
-*** Ivy / Counsel / Swiper
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package counsel
-	:straight t
-	:custom-face
-	`(ivy-current-match ((t (:inherit 'default
-					  :background ,(face-attribute 'default :foreground)
-					  :foreground ,(face-attribute 'default :background)))))
-	:general
-	("C-s" '(swiper-isearch :wk "Search")
-	 "C-x C-b" '(ivy-switch-buffer :wk "Switch Buffer"))
-	(utz/set-leader-key
-	  "/" '(swiper-isearch :wk "Search")
-	  "SPC" '(counsel-M-x :wk "M-x")
-	  "b b" '(ivy-switch-buffer :wk "List Buffers")
-	  "f /" '(swiper-isearch :wk "Search in File")
-	  "f f" '(counsel-find-file :wk "Find File")
-	  "h ," '(counsel-describe-face :wk "Describe Face"))
-	:config
-	(setq ivy-use-virtual-buffers t)
-	(setq ivy-count-format "(%d/%d) ")
-	(ivy-mode 1))
-    #+END_SRC
-
-*** Hydra
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package hydra
+      (use-package ivy-hydra
 	:straight t)
     #+END_SRC
-
-**** Ivy Hydra
-
-     #+BEGIN_SRC emacs-lisp
-       (use-package ivy-hydra
-	 :straight t)
-     #+END_SRC
 
 * Footnotes
 
