@@ -14,43 +14,50 @@
 
 
 
-(use-package general
-  :config
-  (general-auto-unbind-keys)
+;; General
 
-  ;; Setup Definer for Leader Key
-  (general-create-definer utz/set-leader-key
-    :prefix utz/leader-key
-    :non-normal-prefix (concat "M-" utz/leader-key)
-    :keymaps utz/default-definer-keymaps)
+(straight-use-package 'general)
+(require 'general)
+(general-auto-unbind-keys)
 
-  ;; Setup Definer for Local Leader Key
-  (general-create-definer utz/set-localleader-key
-    :prefix utz/localleader-key
-    :non-normal-prefix (concat "M-" utz/localleader-key))
+;; Setup Definer for Leader Key
+(general-create-definer utz/set-leader-key
+  :prefix utz/leader-key
+  :non-normal-prefix (concat "M-" utz/leader-key)
+  :keymaps utz/default-definer-keymaps)
 
-  ;; Define keys not associated with packages
-  (utz/set-leader-key
-    "b d" '(kill-this-buffer :wk "Kill Buffer")
-    "b n" '(next-buffer :wk "Next Buffer")
-    "b p" '(previous-buffer :wk "Previous Buffer")
-    "b" '(:ignore t :wk "Buffer")
-    "f e R" '(utz/load-init-file :wk "Reload Config File")
-    "f e i" '(utz/edit-init-file :wk "Edit Init File")
-    "f e r" '(utz/edit-config-file :wk "Edit Config File")
-    "f e" '(:ignore t :wk "Emacs")
-    "f r" '(revert-buffer :wk "Revert File")
-    "f s" '(save-buffer :wk "Save File")
-    "f" '(:ignore t :wk "File")
-    "g" '(:ignore t :wk "Git")
-    "h e" '(emacs-index-search :wk "Search Emacs Manual")
-    "h l" '(elisp-index-search :wk "Search Elisp Manual")
-    "q" '(:ignore t :wk "Quit")
-    "u" '(universal-argument :wk "Universal Argument")
-    "w" `(,(general-simulate-key "C-w") :wk "Window"))
-  ;; Define Universal Argument Map Keys
-  (general-define-key :keymaps 'universal-argument-map
-		      (concat utz/leader-key " u") 'universal-argument-more))
+;; Setup Definer for Local Leader Key
+(general-create-definer utz/set-localleader-key
+  :prefix utz/localleader-key
+  :non-normal-prefix (concat "M-" utz/localleader-key))
+
+;; Define keys not associated with packages
+(utz/set-leader-key
+  "b d" '(kill-this-buffer :wk "Kill Buffer")
+  "b n" '(next-buffer :wk "Next Buffer")
+  "b p" '(previous-buffer :wk "Previous Buffer")
+  "b" '(:ignore t :wk "Buffer")
+  "f e R" '(utz/load-init-file :wk "Reload Config File")
+  "f e i" '(utz/edit-init-file :wk "Edit Init File")
+  "f e r" '(utz/edit-config-file :wk "Edit Config File")
+  "f e" '(:ignore t :wk "Emacs")
+  "f r" '(revert-buffer :wk "Revert File")
+  "f s" '(save-buffer :wk "Save File")
+  "f" '(:ignore t :wk "File")
+  "g" '(:ignore t :wk "Git")
+  "h e" '(emacs-index-search :wk "Search Emacs Manual")
+  "h l" '(elisp-index-search :wk "Search Elisp Manual")
+  "q" '(:ignore t :wk "Quit")
+  "u" '(universal-argument :wk "Universal Argument")
+  "w" `(,(general-simulate-key "C-w") :wk "Window"))
+
+;; Define Universal Argument Map Keys
+(general-define-key :keymaps 'universal-argument-map
+		    (concat utz/leader-key " u") 'universal-argument-more)
+
+
+
+;; Evil
 
 (use-package evil
   :demand t
