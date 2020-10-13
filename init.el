@@ -6,19 +6,19 @@
 ;; Keywords: convenience
 ;; URL: https://github.com/theutz/utzmacs
 ;; Created: 7 Oct 2020
-
+;;
 ;;; Commentary:
 ;;
-;; I wanted to use a literate org config.  So I did.
+;; Let's try this a different way.
 ;;
-
 ;;; Code:
 
-(let ((gc-cons-threshold most-positive-fixnum))
+(let ((gc-cons-threshold most-positive-fixnum)
+      (current-directory (file-name-directory (or load-file-name buffer-file-name))))
+  
   ;; Make a file to contain all user customizations
   (setq custom-file
-	(expand-file-name "custom.el"
-			  (file-name-directory (or load-file-name buffer-file-name))))
+	(expand-file-name "custom.el" current-directory))
   (load custom-file)
 
   ;; Setup straight.el
@@ -39,12 +39,7 @@
   ;; Setup use-package
   (straight-use-package 'use-package)
 
-  ;; Setup org
-  (use-package org
-    :straight org-plus-contrib
-    :config
-    (org-babel-load-file
-     (expand-file-name "utzmacs.org" user-emacs-directory)))
+  (load (expand-file-name "utzmacs.el" current-directory))
 
   (garbage-collect))
 

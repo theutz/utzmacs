@@ -52,8 +52,5 @@ flycheck_*.el
 straight/
 transient/
 
-# org-babel output
-utzmacs.el
-
 # recentf
 recentf
