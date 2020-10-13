@@ -6,47 +6,30 @@
 ;; Keywords: convenience
 ;; URL: https://github.com/theutz/utzmacs
 ;; Created: 7 Oct 2020
-
+;;
 ;;; Commentary:
 ;;
-;; I wanted to use a literate org config.  So I did.
+;; Let's try this a different way.
 ;;
-
 ;;; Code:
 
-(let ((gc-cons-threshold most-positive-fixnum))
+(let ((gc-cons-threshold most-positive-fixnum)
+      (current-directory (file-name-directory (or load-file-name buffer-file-name))))
+  
   ;; Make a file to contain all user customizations
   (setq custom-file
-	(expand-file-name "custom.el"
-			  (file-name-directory (or load-file-name buffer-file-name))))
+	(expand-file-name "custom.el" current-directory))
   (load custom-file)
 
-  ;; Setup straight.el
-  (defvar bootstrap-version)
-  (setq straight-fix-flycheck t)
-  (let ((bootstrap-file
-	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-	(bootstrap-version 5))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-	  (url-retrieve-synchronously
-	   "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	   'silent 'inhibit-cookies)
-	(goto-char (point-max))
-	(eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
+  ;; Setup load path
+  (add-to-list 'load-path
+	       (expand-file-name "lisp/" current-directory))
 
-  ;; Setup use-package
-  (straight-use-package 'use-package)
-
-  ;; Setup org
-  (use-package org
-    :straight org-plus-contrib
-    :config
-    (org-babel-load-file
-     (expand-file-name "utzmacs.org" user-emacs-directory)))
-
-  (garbage-collect))
+  ;; Main loading sequence
+  (require 'setup-package-tools)
+  (require 'define-utz-namespace)
+  (require 'configure-emacs)
+  (require 'configure-packages))
 
 (provide 'init)
 
