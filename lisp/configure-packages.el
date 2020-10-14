@@ -5,6 +5,7 @@
 ;;; Code:
 
 (require 'define-utz-namespace)
+(require 'straight)
 
 ;; Garbage Collection Magic Hook
 
@@ -49,7 +50,7 @@
   "h l" '(elisp-index-search :wk "Search Elisp Manual")
   "q" '(:ignore t :wk "Quit")
   "u" '(universal-argument :wk "Universal Argument")
-  "w" `(,(general-simulate-key "C-w") :wk "Window"))
+  "w" '(evil-window-map :wk "Window"))
 
 ;; Define Universal Argument Map Keys
 (general-define-key :keymaps 'universal-argument-map
@@ -79,7 +80,8 @@
 (with-eval-after-load 'evil
   (require 'evil-surround)
   (with-eval-after-load 'evil-surround
-    (global-evil-surround-mode 1)))
+    (when (fboundp 'global-evil-surround-mode)
+      (global-evil-surround-mode 1))))
 
 ;; Evil Collection
 
@@ -87,7 +89,8 @@
 (with-eval-after-load 'evil
   (require 'evil-collection)
   (with-eval-after-load 'evil-collection
-    (evil-collection-init)))
+    (when (fboundp 'evil-collection-init)
+      (evil-collection-init))))
 
 
 
@@ -207,11 +210,13 @@
 (setq doom-themes-enable-bold t
       doom-themes-enable-italic t)
 (load-theme 'doom-outrun-electric t)
-(doom-themes-visual-bell-config)
+(when (fboundp 'doom-themes-visual-bell-config)
+  (doom-themes-visual-bell-config))
 ;;(doom-themes-neotree-config)
 ;;(setq doom-themes-treemacs-theme "doom-colors")
 ;;(doom-themes-treemacs-config)
-(doom-themes-org-config)
+(when (fboundp 'doom-themes-org-config)
+  (doom-themes-org-config))
 
 
 
