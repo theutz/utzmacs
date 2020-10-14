@@ -6,49 +6,6 @@
 
 
 
-;; General
-
-(straight-use-package 'general)
-(require 'general)
-(general-auto-unbind-keys)
-
-;; Setup Definer for Leader Key
-(general-create-definer utz/set-leader-key
-  :prefix utz/leader-key
-  :non-normal-prefix (concat "M-" utz/leader-key)
-  :keymaps utz/default-definer-keymaps)
-
-;; Setup Definer for Local Leader Key
-(general-create-definer utz/set-localleader-key
-  :prefix utz/localleader-key
-  :non-normal-prefix (concat "M-" utz/localleader-key))
-
-;; Define keys not associated with packages
-(utz/set-leader-key
-  "b d" '(kill-this-buffer :wk "Kill Buffer")
-  "b n" '(next-buffer :wk "Next Buffer")
-  "b p" '(previous-buffer :wk "Previous Buffer")
-  "b" '(:ignore t :wk "Buffer")
-  "f e R" '(utz/load-init-file :wk "Reload Config File")
-  "f e i" '(utz/edit-init-file :wk "Edit Init File")
-  "f e r" '(utz/edit-config-file :wk "Edit Config File")
-  "f e" '(:ignore t :wk "Emacs")
-  "f r" '(revert-buffer :wk "Revert File")
-  "f s" '(save-buffer :wk "Save File")
-  "f" '(:ignore t :wk "File")
-  "g" '(:ignore t :wk "Git")
-  "h e" '(emacs-index-search :wk "Search Emacs Manual")
-  "h l" '(elisp-index-search :wk "Search Elisp Manual")
-  "q" '(:ignore t :wk "Quit")
-  "u" '(universal-argument :wk "Universal Argument")
-  "w" '(evil-window-map :wk "Window"))
-
-;; Define Universal Argument Map Keys
-(general-define-key :keymaps 'universal-argument-map
-		    (concat utz/leader-key " u") 'universal-argument-more)
-
-
-
 ;; Evil
 
 (straight-use-package 'evil)
@@ -99,10 +56,9 @@
 
 (straight-use-package 'company)
 (require 'company)
-(with-eval-after-load 'company
-  (add-hook 'after-init-hook 'global-company-mode)
-  (with-eval-after-load 'general
-    (general-define-key "C-SPC" '(company-complete :wk "Company Complete"))))
+(add-hook 'after-init-hook 'global-company-mode)
+(with-eval-after-load 'general
+  (general-define-key "C-SPC" '(company-complete :wk "Company Complete")))
 
 
 
@@ -113,12 +69,7 @@
 	      which-key-max-description-length 40
 	      which-key-add-column-padding 1)
 (require 'which-key)
-(with-eval-after-load 'which-key
-  (which-key-mode)
-  (with-eval-after-load 'general
-    (utz/set-leader-key :infix "h"
-      "K" '(which-key-show-top-level :wk "Which Key Show Top Level")
-      "M" '(which-key-show-major-mode :wk "Which Key Show Major Mode"))))
+(which-key-mode)
 
 
 
@@ -126,10 +77,7 @@
 
 (straight-use-package 'projectile)
 (require 'projectile)
-(with-eval-after-load 'projectile
-  (with-eval-after-load 'general
-    (utz/set-leader-key "p" 'projectile-command-map))
-  (projectile-mode +1))
+(projectile-mode +1)
 
 
 
@@ -137,7 +85,6 @@
 
 (straight-use-package 'restart-emacs)
 (require 'restart-emacs)
-(utz/set-leader-key "q r" '(restart-emacs :wk "Restart Emacs"))
 
 
 
@@ -145,10 +92,6 @@
 
 (straight-use-package 'magit)
 (require 'magit)
-(utz/set-leader-key :infix "g"
-  "SPC" '(magit-status :wk "Magit Status")
-  "RET" '(magit-dispatch :wk "Magit Dispatch")
-  "s" '(magit-stage-file :wk "Magit Stage File"))
 
 ;; Evil Magit
 
@@ -167,9 +110,6 @@
       org-directory "~/org"
       diary-file (expand-file-name "diary" org-directory))
 (setq-default org-agenda-include-diary t)
-(utz/set-leader-key :infix "o"
-  "a SPC" '(org-agenda :wk "Org Agenda")
-  "a" '(:ignore t :wk "Agenda"))
 
 ;; Org Bullets
 
@@ -184,13 +124,6 @@
 
 (straight-use-package 'helpful)
 (require 'helpful)
-(utz/set-leader-key :infix "h"
-  "SPC" '(helpful-at-point :wk "Helpful At Point")
-  "C" '(helpful-command :wk "Helpful Command")
-  "F" '(helpful-function :wk "Helpful Function")
-  "f" '(helpful-callable :wk "Helpful Callable")
-  "k" '(helpful-key :wk "Helpful Key")
-  "v" '(helpful-variable :wk "Helpful Variable"))
 
 
 
@@ -201,13 +134,11 @@
 (setq doom-themes-enable-bold t
       doom-themes-enable-italic t)
 (load-theme 'doom-outrun-electric t)
-(when (fboundp 'doom-themes-visual-bell-config)
-  (doom-themes-visual-bell-config))
+(doom-themes-visual-bell-config)
 ;;(doom-themes-neotree-config)
 ;;(setq doom-themes-treemacs-theme "doom-colors")
 ;;(doom-themes-treemacs-config)
-(when (fboundp 'doom-themes-org-config)
-  (doom-themes-org-config))
+(doom-themes-org-config)
 
 
 
@@ -234,16 +165,6 @@
 (custom-set-faces `(ivy-current-match ((t (:inherit 'default
 				   :background ,(face-attribute 'default :foreground)
 				   :foreground ,(face-attribute 'default :background))))))
-(general-define-key
- "C-s" '(swiper-isearch :wk "Search")
- "C-x C-b" '(ivy-switch-buffer :wk "Switch Buffer"))
-(utz/set-leader-key
-  "/" '(swiper-isearch :wk "Search")
-  "SPC" '(counsel-M-x :wk "M-x")
-  "b b" '(ivy-switch-buffer :wk "List Buffers")
-  "f /" '(swiper-isearch :wk "Search in File")
-  "f f" '(counsel-find-file :wk "Find File")
-  "h ," '(counsel-describe-face :wk "Describe Face"))
 (setq ivy-use-virtual-buffers t)
 (setq ivy-count-format "(%d/%d) ")
 (ivy-mode 1)

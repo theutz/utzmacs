@@ -15,7 +15,4 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; Load use-package
-(straight-use-package 'use-package)
-
 (provide 'setup-package-tools)
