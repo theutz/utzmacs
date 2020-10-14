@@ -202,17 +202,16 @@
 
 ;; Doom Themes
 
-(use-package doom-themes
-  :custom
-  (doom-themes-enable-bold t)
-  (doom-themes-enable-italic t)
-  :config
-  (load-theme 'doom-outrun-electric t)
-  (doom-themes-visual-bell-config)
-  ;;(doom-themes-neotree-config)
-  ;;(setq doom-themes-treemacs-theme "doom-colors")
-  ;;(doom-themes-treemacs-config)
-  (doom-themes-org-config))
+(straight-use-package 'doom-themes)
+(require 'doom-themes)
+(setq doom-themes-enable-bold t
+      doom-themes-enable-italic t)
+(load-theme 'doom-outrun-electric t)
+(doom-themes-visual-bell-config)
+;;(doom-themes-neotree-config)
+;;(setq doom-themes-treemacs-theme "doom-colors")
+;;(doom-themes-treemacs-config)
+(doom-themes-org-config)
 
 
 
