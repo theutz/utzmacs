@@ -141,10 +141,9 @@
 
 ;; Restart Emacs
 
-(use-package restart-emacs
-  :general
-  (utz/set-leader-key
-    "q r" '(restart-emacs :wk "Restart Emacs")))
+(straight-use-package 'restart-emacs)
+(require 'restart-emacs)
+(utz/set-leader-key "q r" '(restart-emacs :wk "Restart Emacs"))
 
 
 
