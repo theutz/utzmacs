@@ -126,6 +126,16 @@
       "K" '(which-key-show-top-level :wk "Which Key Show Top Level")
       "M" '(which-key-show-major-mode :wk "Which Key Show Major Mode"))))
 
+
+
+;; Projectile
+
+(straight-use-package 'projectile)
+(require 'projectile)
+(with-eval-after-load 'projectile
+  (with-eval-after-load 'general
+    (utz/set-leader-key "p" 'projectile-command-map))
+  (projectile-mode +1))
 
 
 
