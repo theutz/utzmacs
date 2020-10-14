@@ -149,17 +149,19 @@
 
 ;; Magit
 
-(use-package magit
-  :general
-  (utz/set-leader-key :infix "g"
-    "SPC" '(magit-status :wk "Magit Status")
-    "RET" '(magit-dispatch :wk "Magit Dispatch")
-    "s" '(magit-stage-file :wk "Magit Stage File")))
+(straight-use-package 'magit)
+(require 'magit)
+(utz/set-leader-key :infix "g"
+  "SPC" '(magit-status :wk "Magit Status")
+  "RET" '(magit-dispatch :wk "Magit Dispatch")
+  "s" '(magit-stage-file :wk "Magit Stage File"))
 
 ;; Evil Magit
 
-(use-package evil-magit
-  :after (evil magit))
+(straight-use-package 'evil-magit)
+(with-eval-after-load 'evil
+  (with-eval-after-load 'magit
+    (require 'evil-magit)))
 
 
 
