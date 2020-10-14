@@ -256,9 +256,13 @@
 
 ;; Hydra
 
-(use-package hydra)
+(straight-use-package 'hydra)
+(require 'hydra)
 
-(use-package ivy-hydra)
+(straight-use-package 'ivy-hydra)
+(with-eval-after-load 'ivy
+  (with-eval-after-load 'hydra
+    (require 'ivy-hydra)))
 
 
 
