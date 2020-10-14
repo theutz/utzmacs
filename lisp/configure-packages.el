@@ -217,9 +217,9 @@
 
 ;; YASnippet
 
-(use-package yasnippet
-  :config
-  (yas-global-mode 1))
+(straight-use-package 'yasnippet)
+(require 'yasnippet)
+(yas-global-mode 1)
 
 
 
