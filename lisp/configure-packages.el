@@ -233,25 +233,24 @@
 
 ;; Counsel / Ivy / Swiper
 
-(use-package counsel
-  :custom-face
-  (ivy-current-match ((t (:inherit 'default
+(straight-use-package 'counsel)
+(require 'counsel)
+(custom-set-faces `(ivy-current-match ((t (:inherit 'default
 				   :background ,(face-attribute 'default :foreground)
-				   :foreground ,(face-attribute 'default :background)))))
-  :general
-  ("C-s" '(swiper-isearch :wk "Search")
-   "C-x C-b" '(ivy-switch-buffer :wk "Switch Buffer"))
-  (utz/set-leader-key
-    "/" '(swiper-isearch :wk "Search")
-    "SPC" '(counsel-M-x :wk "M-x")
-    "b b" '(ivy-switch-buffer :wk "List Buffers")
-    "f /" '(swiper-isearch :wk "Search in File")
-    "f f" '(counsel-find-file :wk "Find File")
-    "h ," '(counsel-describe-face :wk "Describe Face"))
-  :config
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-  (ivy-mode 1))
+				   :foreground ,(face-attribute 'default :background))))))
+(general-define-key
+ "C-s" '(swiper-isearch :wk "Search")
+ "C-x C-b" '(ivy-switch-buffer :wk "Switch Buffer"))
+(utz/set-leader-key
+  "/" '(swiper-isearch :wk "Search")
+  "SPC" '(counsel-M-x :wk "M-x")
+  "b b" '(ivy-switch-buffer :wk "List Buffers")
+  "f /" '(swiper-isearch :wk "Search in File")
+  "f f" '(counsel-find-file :wk "Find File")
+  "h ," '(counsel-describe-face :wk "Describe Face"))
+(setq ivy-use-virtual-buffers t)
+(setq ivy-count-format "(%d/%d) ")
+(ivy-mode 1)
 
 
 
