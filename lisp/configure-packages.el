@@ -167,37 +167,22 @@
 
 ;; Org
 
-(use-package org
-  :straight org-plus-contrib
-  :general
-  (utz/set-leader-key :infix "o"
-    "a SPC" '(org-agenda :wk "Org Agenda")
-    "a" '(:ignore t :wk "Agenda"))
-  :custom
-  (org-confirm-babel-evaluate nil)
-  (org-agenda-include-diary t)
-  (org-directory "~/org")
-  (diary-file (expand-file-name "diary" org-directory))
-  :init
-  ;; `:init' here is ineffective, since org is loaded
-  ;; when tangling this file. To execute code before `org-mode'
-  ;; is loaded, use `init.el';
-  :config)
+(straight-use-package 'org-plus-contrib)
+(require 'org)
+(setq org-confirm-babel-evaluate nil
+      org-directory "~/org"
+      diary-file (expand-file-name "diary" org-directory))
+(setq-default org-agenda-include-diary t)
+(utz/set-leader-key :infix "o"
+  "a SPC" '(org-agenda :wk "Org Agenda")
+  "a" '(:ignore t :wk "Agenda"))
 
 ;; Org Bullets
 
-(use-package org-bullets
-  :after org
-  :hook (org-mode . org-bullets-mode))
-
-;; Org Mac iCal
-
-(use-package org-mac-iCal
-  :straight (org-mac-iCal :type git :host github :repo "ndw/org-mac-iCal"
-			  :fork (:host github
-				       :repo "theutz/org-mac-iCal"))
-  :custom
-  (org-mac-iCal-calendar-names '("Personal")))
+(straight-use-package 'org-bullets)
+(require 'org-bullets)
+(with-eval-after-load 'org
+  (add-hook 'org-mode-hook 'org-bullets-mode))
 
 
 
