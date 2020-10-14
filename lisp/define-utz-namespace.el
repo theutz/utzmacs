@@ -1,17 +1,9 @@
-;;; define-utz-namespace.el --- Define the utz namespace
-;;
-;;; Commentary:
-;;
-;; This is all I've made.
-;;
-;;; Code:
-
-
 ;; Customization Options
 
 (defgroup utz nil
   "All my customization options."
   :group 'convenience)
+
 
 
 ;; Leader Keys
@@ -33,6 +25,7 @@
   :type '(repeat symbol)
   :initialize 'custom-initialize-default
   :group 'utz)
+
 
 
 ;; Important Files
@@ -49,6 +42,7 @@
   :type 'file
   :initialize 'custom-initialize-default
   :group 'utz)
+
 
 
 ;; Faces
@@ -62,6 +56,7 @@
 
 (defface utz/fixed-width-font '((t (:inherit 'default :family "BlexMono Nerd Font")))
   "Face for code and other fixed-width applications.")
+
 
 
 ;; Functions
@@ -84,8 +79,7 @@ open it in the same window."
 		  ('(4) 'find-file)
 		  (- 'find-file-other-window))))
     (funcall opener utz/init-file)))
+
 
 
 (provide 'define-utz-namespace)
-
-;;; define-utz-namespace.el ends here

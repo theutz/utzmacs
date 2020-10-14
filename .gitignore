@@ -41,9 +41,7 @@ flycheck_*.el
 
 # projectiles files
 .projectile
-
-# directory configuration
-.dir-locals.el
+projectile-bookmarks.eld
 
 # network security
 /network-security.data
@@ -54,4 +52,3 @@ transient/
 
 # recentf
 recentf
-/projectile-bookmarks.eld

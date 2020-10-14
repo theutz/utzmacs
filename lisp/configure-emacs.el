@@ -1,9 +1,3 @@
-;;; configure-emacs.el --- Tweaks that aren't package-related.
-;;
-;;; Commentary:
-;;
-;;; Code:
-
 (setq-default buffer-file-coding-system 'utf-8-unix)
 (set-default-coding-systems 'utf-8-unix)
 (setq locale-coding-system 'utf-8-unix)
@@ -31,5 +25,3 @@
 				  :height 120)))))
 
 (provide 'configure-emacs)
-
-;;; configure-emacs.el ends here

@@ -1,12 +1,3 @@
-;;; configure-packages.el --- Load and configure packages
-;;
-;;; Commentary:
-;;
-;;; Code:
-
-(require 'define-utz-namespace)
-(require 'straight)
-
 ;; Garbage Collection Magic Hook
 
 (straight-use-package 'gcmh)
@@ -272,5 +263,3 @@
 
 
 (provide 'configure-packages)
-
-;;; configure-packages.el ends here
