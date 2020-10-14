@@ -188,15 +188,15 @@
 
 ;; Helpful
 
-(use-package helpful
-  :general
-  (utz/set-leader-key :infix "h"
-    "SPC" '(helpful-at-point :wk "Helpful At Point")
-    "C" '(helpful-command :wk "Helpful Command")
-    "F" '(helpful-function :wk "Helpful Function")
-    "f" '(helpful-callable :wk "Helpful Callable")
-    "k" '(helpful-key :wk "Helpful Key")
-    "v" '(helpful-variable :wk "Helpful Variable")))
+(straight-use-package 'helpful)
+(require 'helpful)
+(utz/set-leader-key :infix "h"
+  "SPC" '(helpful-at-point :wk "Helpful At Point")
+  "C" '(helpful-command :wk "Helpful Command")
+  "F" '(helpful-function :wk "Helpful Function")
+  "f" '(helpful-callable :wk "Helpful Callable")
+  "k" '(helpful-key :wk "Helpful Key")
+  "v" '(helpful-variable :wk "Helpful Variable"))
 
 
 
