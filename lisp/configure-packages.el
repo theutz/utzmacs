@@ -114,19 +114,18 @@
 
 ;; Which Key
 
-(use-package which-key
-  :demand t
-  :functions which-key-mode
-  :general
-  (utz/set-leader-key :infix "h"
-    "K" '(which-key-show-top-level :wk "Which Key Show Top Level")
-    "M" '(which-key-show-major-mode :wk "Which Key Show Major Mode"))
-  :custom
-  (which-key-idle-delay 0.3)
-  (which-key-max-description-length 40)
-  (which-key-add-column-padding 1)
-  :config
-  (which-key-mode))
+(straight-use-package 'which-key)
+(setq-default which-key-idle-delay 0.3
+	      which-key-max-description-length 40
+	      which-key-add-column-padding 1)
+(require 'which-key)
+(with-eval-after-load 'which-key
+  (which-key-mode)
+  (with-eval-after-load 'general
+    (utz/set-leader-key :infix "h"
+      "K" '(which-key-show-top-level :wk "Which Key Show Top Level")
+      "M" '(which-key-show-major-mode :wk "Which Key Show Major Mode"))))
+
 
 
 
