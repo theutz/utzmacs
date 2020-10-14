@@ -225,8 +225,9 @@
 
 ;; WS Butler
 
-(use-package ws-butler
-  :hook (prog-mode . ws-butler-mode))
+(straight-use-package 'ws-butler)
+(require 'ws-butler)
+(add-hook 'prog-mode-hook 'ws-butler-mode)
 
 
 
