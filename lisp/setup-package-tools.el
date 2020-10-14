@@ -22,8 +22,10 @@
   (load bootstrap-file nil 'nomessage))
 
 ;; Load use-package
-(straight-use-package 'use-package)
+(when (fboundp 'straight-use-package)
+  (straight-use-package 'use-package))
 
 (provide 'setup-package-tools)
+(require 'setup-package-tools)
 
 ;;; setup-package-tools.el ends here
